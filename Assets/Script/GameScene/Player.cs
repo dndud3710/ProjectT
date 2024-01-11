@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     }
     void starttt()
     {
-        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.GunFire));
+        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.Shield));
         GameObject g = Instantiate(Skills[1]);
         g.GetComponent<ActiveSkills>().Use();
     }

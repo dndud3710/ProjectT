@@ -11,22 +11,23 @@ public class DurianMove : ThrowSkill
     {
         base.Start();
         cr=GetComponent<CircleCollider2D>();
-        forwardgo = Vector2.up * Speed;
+        forwardgo =  new Vector2(1,1) * Speed;
     }
     protected override void Move()
     {
         transform.Rotate(new Vector3(0, 0, 4f));
-        transform.Translate(forwardgo * Time.deltaTime * Speed);
+        transform.Translate(forwardgo * Time.deltaTime * Speed , Space.World);
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if (collision.gameObject.CompareTag("SkillWall"))
+        print(" F");
+        if (collision.CompareTag("SkillWall"))
         {
             ColliderDistance2D cd = cr.Distance(collision);
 
             forwardgo = Vector2.Reflect(forwardgo.normalized, cd.normal);
-
+            
         }
     }
 }

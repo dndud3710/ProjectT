@@ -6,15 +6,10 @@ public class Test2 : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public void Augh(int intParam)
-    {
-        print("augh!!");
-        print(intParam * 2);
-    }
 
     void Start()
     {
-        
+        Destroy(gameObject, 3f);
     }
 
     // Update is called once per frame

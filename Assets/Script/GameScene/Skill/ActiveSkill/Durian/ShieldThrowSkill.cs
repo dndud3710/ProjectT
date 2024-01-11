@@ -9,7 +9,7 @@ public class ShieldThrowSkill : ActiveSkills
     [Tooltip("스킬이 몇개 나가는지 개수")]
     public int count = 1;
     [Tooltip("스킬 쿨타임")]
-    public float coolDown = 2f;
+    public float coolDown = 4f;
     [Tooltip("오브젝트 관통 횟수 (-10일경우 무한)")]
     public int Duration = 20;
     [Tooltip("오브젝트 파괴 시간")]
@@ -25,33 +25,33 @@ public class ShieldThrowSkill : ActiveSkills
     }
     public override void Use()
     {
-        StartCoroutine(AttackSwordSlashStart());
+        StartCoroutine(ShieldThrow());
     }
     /// <summary>
     /// 코루틴 패턴
     /// </summary>
     /// <returns></returns>
-    IEnumerator AttackSwordSlashStart()
+    IEnumerator ShieldThrow()
     {
-        Quaternion currentRotation = Quaternion.identity;
-
+        GameObject startCooldown = null; //이 오브젝트가 null이 될 때는 실드가 파괴되었을때
         while (true)
         {
             //실드가 존재할 경우에는 실행하지 않기
-            //스킬 재사용 시간
-            yield return new WaitForSeconds(coolDown);
-            yield return new WaitForSeconds(0.2f);
-            GameObject g = Instantiate(Shield);
-            GunFireMove b = g.GetComponent<GunFireMove>();
-
-            b.setThrowSkills(StageManager.Instance.playerScript.getDamage() * 2,
-            Duration, ClearPrefabsTime, Speed
-            );
-            g.transform.position = getPlayerTF().position;
-            currentRotation = getPlayerRot().rotation;
-            g.transform.rotation = currentRotation;
-            
-
+            if (startCooldown == null)
+            {
+                //스킬 재사용 시간
+                yield return new WaitForSeconds(coolDown);
+                GameObject g = Instantiate(Shield);
+                startCooldown = g;
+                DurianMove b = g.GetComponent<DurianMove>();
+                g.transform.position = getPlayerTF().position;
+                b.setThrowSkills(StageManager.Instance.playerScript.getDamage() * 2,
+                Duration, ClearPrefabsTime, Speed
+                );
+                
+                
+            }
+            yield return null;
         }
     }
 }

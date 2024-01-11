@@ -93,7 +93,7 @@ public class StageManager : MonoBehaviour
         st = new Stopwatch();
         st.Start();
         playerScript = Player.GetComponent<Player>();
-        StartCoroutine(MonsterRegen());
+       // StartCoroutine(MonsterRegen());
 
         CameraWallInit();
     }

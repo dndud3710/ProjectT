@@ -16,5 +16,6 @@ public interface IStages
 public enum EActiveSkillType
 {
     SwordSlash = 0,
-    GunFire
+    GunFire,
+    Shield
 }

@@ -1,22 +1,33 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public ParticleSystem p1;
-    public ParticleSystem p2;
-
+    public GameObject p;
+    private GameObject g;
+    private int a;
     // Start is called before the first frame update
     void Start()
     {
-        p1.Play();
-        p2.Play();
+        StartCoroutine(aa());
+        a = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator aa()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * 3);
-    }   
+        g = null;
+        while (true)
+        {
+            if (g == null)
+            {
+                yield return new WaitForSeconds(4f);
+                print("»ý¼º!");
+                g = Instantiate(p);
+                
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 }
