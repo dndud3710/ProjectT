@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ThrowSkill : MonoBehaviour
+{
+    private int damage;
+    [Tooltip("오브젝트 관통 횟수 (-10일경우 무한)")]
+    private int Du;
+    [Tooltip("오브젝트 파괴 시간")]
+    private float ClearPrefabsTime;
+    [Tooltip("오브젝트가 날라가는 속도")]
+    protected float Speed;
+
+
+    protected virtual void Start()
+    {
+        Destroy(gameObject, ClearPrefabsTime);
+    }
+
+    protected virtual void Move()
+    {
+        transform.Translate(Vector2.up * Time.deltaTime * Speed );
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
+        if (Du <= 0 && Du!=-10)
+            Destroy(gameObject);
+    }
+    public void setThrowSkills(int damage,int dur, float t , float speed)
+    {
+        this.damage = damage;
+        this.Du = dur;
+        ClearPrefabsTime = t;
+        this.Speed = speed;
+    }
+    /// <summary>
+    /// 공격 판정
+    /// </summary>
+    /// <param name="collision"></param>
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Monster"))
+        {
+            Monster monster = collision.GetComponent<Monster>();
+            if (Du != -10)
+            {
+                Du--;
+                monster.TakeDamage(damage);
+            }
+            else
+            {
+
+                monster.TakeDamage(damage);
+            }
+        }
+    }
+}
