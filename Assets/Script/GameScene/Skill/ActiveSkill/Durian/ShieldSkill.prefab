@@ -48,5 +48,5 @@ MonoBehaviour:
   coolDown: 4
   Duration: 20
   ClearPrefabsTime: 20
-  Speed: 1
-  Shield: {fileID: 4596669052721955558, guid: a3898aace0e26c3458449c0d791a40cb, type: 3}
+  Speed: 2
+  Shield: {fileID: 6019531532557152274, guid: a3898aace0e26c3458449c0d791a40cb, type: 3}

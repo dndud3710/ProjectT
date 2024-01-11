@@ -30,6 +30,7 @@ public class StageManager : MonoBehaviour
     private int Killnum;
     public TextMeshProUGUI LevelText;
     public BoxCollider2D[] CameraWall;//순서대로 0;좌,1:우,2:위,3:아래
+    public GameObject StageSkills;
 
     public Failed FailedPanel;//실패했을 시 나타나는 UI 
     public GameObject deadPArticle;
@@ -93,7 +94,7 @@ public class StageManager : MonoBehaviour
         st = new Stopwatch();
         st.Start();
         playerScript = Player.GetComponent<Player>();
-       // StartCoroutine(MonsterRegen());
+        StartCoroutine(MonsterRegen());
 
         CameraWallInit();
     }

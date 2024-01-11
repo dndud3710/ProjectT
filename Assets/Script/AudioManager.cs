@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour
         {
             BGMSource[i] = BGMobj.AddComponent<AudioSource>();
             BGMSource[i].clip = BGMSound[i];
-            BGMSource[i].volume = 0.25f;
+            BGMSource[i].volume = 0.15f;
             BGMSource[i].playOnAwake = false;
             BGMSource[i].loop = true;
         }

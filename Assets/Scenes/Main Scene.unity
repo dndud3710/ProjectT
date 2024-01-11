@@ -6360,6 +6360,8 @@ MonoBehaviour:
   - {fileID: 6154990772197469553, guid: 61e02552a4084e047903a7bae3e89c25, type: 3}
   - {fileID: 796881892281321966, guid: 741df2e66f99b924d95aa8d951bde59b, type: 3}
   - {fileID: 3015464346649738709, guid: 11fa7c59e3bd91245868d9efacc23041, type: 3}
+  - {fileID: 8765401004763160183, guid: 7b0ec16bdde7e4e42b0f55def953f386, type: 3}
+  - {fileID: 4062549875178558104, guid: 91ffda6ea64620241af8f041cc31753e, type: 3}
 --- !u!4 &1886908443
 Transform:
   m_ObjectHideFlags: 0

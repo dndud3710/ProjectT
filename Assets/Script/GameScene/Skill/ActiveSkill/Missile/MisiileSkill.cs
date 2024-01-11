@@ -1,30 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class GunFire : ActiveSkills
+public class MisiileSkill : ActiveSkills
 {
-    //Gun종류 무기를 꼇을경우 총알 발사
-   
-    public GameObject Bullet;
 
+    public GameObject Bullet;
+    
     protected override void Start()
     {
         base.Start();
-        
+
     }
     private void Reset()
     {
         count = 1;
-        coolDown = 3f;
-        Duration = 2;
-        ClearPrefabsTime = 5f;
-        Speed = 7f;
+        coolDown = 4f;
+        Duration = 1;
+        ClearPrefabsTime = 7f;
+        Speed = 3f;
     }
     public override void Use()
     {
         StartCoroutine(AttackSwordSlashStart());
     }
+
+    public Quaternion SearchMonster()
+    {
+        return StageManager.Instance.playerScript.CastAround();
+    }
+
     /// <summary>
     /// 코루틴 패턴
     /// </summary>
@@ -36,25 +42,24 @@ public class GunFire : ActiveSkills
         
         while (true)
         {
-            
             //스킬 재사용 시간
             yield return new WaitForSeconds(coolDown);
             c = count;
             while (c > 0)
             {
                 c--;
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(1f);
                 GameObject g = Instantiate(Bullet);
-                GunFireMove b = g.GetComponent<GunFireMove>();
-                
-                b.setThrowSkills(StageManager.Instance.playerScript.getDamage() * 2,
+                MissileMove b = g.GetComponent<MissileMove>();
+
+                b.setThrowSkills(StageManager.Instance.playerScript.getDamage(),
                     Duration, ClearPrefabsTime, Speed
                     );
                 g.transform.position = getPlayerTF().position;
-                currentRotation = getPlayerRot().rotation;
+                currentRotation = SearchMonster();
                 g.transform.rotation = currentRotation;
             }
-
         }
     }
+    
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ThrowSkill : MonoBehaviour
 {
+    [Tooltip("UI기준 좌표인지 World기준 좌표인지")]
+    public PointType pt;
     private int damage;
     [Tooltip("오브젝트 관통 횟수 (-10일경우 무한)")]
     private int Du;
@@ -12,15 +14,35 @@ public class ThrowSkill : MonoBehaviour
     [Tooltip("오브젝트가 날라가는 속도")]
     protected float Speed;
 
+    //UI전용 트랜스폼
+    RectTransform rt;
+    protected Vector2 forwardgo;
 
     protected virtual void Start()
     {
         Destroy(gameObject, ClearPrefabsTime);
+        if (PointType.UI == pt)
+        {
+            rt = GetComponent<RectTransform>();
+            //시작 방향전환 나중에 추가
+            int d = Random.Range(0, 2);
+            switch (d)
+            {
+                case 0:
+                    forwardgo = new Vector2(Random.Range(0.1f, 1f), Random.Range(0.1f, 1f)) * Speed;
+                    break;
+                case 1:
+                    forwardgo = new Vector2(Random.Range(-1f, -0.1f), Random.Range(-1f, 0.1f)) * Speed;
+                    break;
+            }
+        }
     }
-
     protected virtual void Move()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * Speed );
+       if(pt==PointType.World)
+            transform.Translate(Vector2.up * Time.deltaTime * Speed );
+        else if (pt == PointType.UI)
+            rt.Translate(forwardgo * Time.deltaTime * Speed,Space.World);
     }
     // Update is called once per frame
     void Update()
@@ -28,6 +50,12 @@ public class ThrowSkill : MonoBehaviour
         Move();
         if (Du <= 0 && Du!=-10)
             Destroy(gameObject);
+        if (pt == PointType.UI)
+            transform.Rotate(0, 0, 3f);
+    }
+    public void DurationZero()
+    {
+        Du = -1;
     }
     public void setThrowSkills(int damage,int dur, float t , float speed)
     {

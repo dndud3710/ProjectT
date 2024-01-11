@@ -17,5 +17,12 @@ public enum EActiveSkillType
 {
     SwordSlash = 0,
     GunFire,
-    Shield
+    Shield,
+    ThrowHammer,
+    BubbleBomb
+}
+public enum PointType
+{
+    UI,
+    World
 }

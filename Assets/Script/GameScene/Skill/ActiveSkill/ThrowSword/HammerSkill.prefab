@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6154990772197469553
+--- !u!1 &8765401004763160183
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5029266496329666126}
-  - component: {fileID: 8121083533496058288}
+  - component: {fileID: 1534475354376283387}
+  - component: {fileID: 7519687557618497008}
   m_Layer: 0
-  m_Name: SwordSlashSkill
+  m_Name: HammerSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5029266496329666126
+--- !u!4 &1534475354376283387
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6154990772197469553}
+  m_GameObject: {fileID: 8765401004763160183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.441403, y: 12.305054, z: 0.11931504}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,21 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8121083533496058288
+--- !u!114 &7519687557618497008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6154990772197469553}
+  m_GameObject: {fileID: 8765401004763160183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1dbeedd4a83a3429fd15a437ec2c79, type: 3}
+  m_Script: {fileID: 11500000, guid: 04df350cb909cd64aa2887c428119c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 2
+  count: 1
   coolDown: 2
-  Duration: -10
-  ClearPrefabsTime: 3
-  Speed: 4
-  SlashPrefabs: {fileID: 4949789097131952177, guid: eafc1e1c258fd1b4a9d4ee346ba7b294, type: 3}
+  Duration: 8
+  ClearPrefabsTime: 20
+  Speed: 2
+  HammerPrefabs: {fileID: 6631041480817787831, guid: 40df78bff4ab7d84aa09cff689bcbad8, type: 3}

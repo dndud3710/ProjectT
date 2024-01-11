@@ -1,6 +1,7 @@
 using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Transactions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,13 +31,13 @@ public class Player : MonoBehaviour
     public BoxCollider2D col;
     private void Awake()
     {
-        
+
     }
     private void Start()
     {
         Init();
-        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.SwordSlash)) ;
-        GameObject g =  Instantiate(Skills[0]);
+        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.SwordSlash));
+        GameObject g = Instantiate(Skills[0]);
         g.GetComponent<ActiveSkills>().Use();
         Invoke("starttt", 0.8f);
         float verticalSize = Camera.main.orthographicSize * 2.0f;
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
     }
     void starttt()
     {
-        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.Shield));
+        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.BubbleBomb));
         GameObject g = Instantiate(Skills[1]);
         g.GetComponent<ActiveSkills>().Use();
     }
@@ -81,7 +82,7 @@ public class Player : MonoBehaviour
         {
             ShotPoint.gameObject.SetActive(true);
             // atan2를 사용하여 라디안으로 각도를 계산하고, 도(degree)로 변환
-            float Shotangle = ( Mathf.Atan2(Dir.y, Dir.x) * Mathf.Rad2Deg)-90;
+            float Shotangle = (Mathf.Atan2(Dir.y, Dir.x) * Mathf.Rad2Deg) - 90;
 
             // Z축을 중심으로 회전 적용
             ShotPointAngle.rotation = Quaternion.Euler(new Vector3(0, 0, Shotangle));
@@ -99,6 +100,7 @@ public class Player : MonoBehaviour
         return ShotPointAngle;
     }
 
+
     #region 전투
     /// <summary>
     /// 전투 관련
@@ -110,7 +112,7 @@ public class Player : MonoBehaviour
         HpBarUpdate();
         Dead();
     }
-    
+
     public int getDamage()
     {
         return damage;
@@ -128,5 +130,29 @@ public class Player : MonoBehaviour
             //스테이지 실패 UI
         }
     }
+
+    //주변 AllCast
+    public Quaternion CastAround()
+    {
+        Collider2D[] monsters=  Physics2D.OverlapCircleAll(transform.position, 5f,LayerMask.GetMask("Monster"));
+        float distance=100f;
+        float dist;
+        GameObject Attackmonster = null;
+       
+        foreach(Collider2D monster in monsters)
+        {
+            
+            dist = Mathf.Abs(Vector2.Distance(transform.position , monster.transform.position));
+            if(dist<distance)
+            {
+                distance = dist;
+                Attackmonster = monster.gameObject;
+            }
+        }
+        Vector2 vec = Attackmonster.transform.position - transform.position;
+        float Shotangle = (Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg) - 90;
+        return Quaternion.Euler(new Vector3(0, 0, Shotangle));
+    }
+
     #endregion
 }

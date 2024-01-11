@@ -6,21 +6,20 @@ using UnityEngine;
 
 public class SwordSlash : ActiveSkills
 {
-    //Gun종류 무기를 꼇을경우 총알 발사
-    [Tooltip("스킬이 몇개 나가는지 개수")]
-    public int count = 2;
-    [Tooltip("스킬 쿨타임")]
-    public float coolDown = 2f;
-    [Tooltip("오브젝트 관통 횟수 (-10일경우 무한)")]
-    public int Duration = -10;
-    [Tooltip("오브젝트 파괴 시간")]
-    public float ClearPrefabsTime = 3f;
-    [Tooltip("오브젝트가 날라가는 속도")]
-    public float Speed = 4f;
+    //검기 기본공격중에 하나
+    
     public GameObject SlashPrefabs;
     protected override void Start()
     {
         base.Start();
+    }
+    private void Reset()
+    {
+        count = 2;
+        coolDown = 2f;
+        Duration = -10;
+        ClearPrefabsTime = 3f;
+        Speed = 4f;
     }
     public override void Use()
     {
