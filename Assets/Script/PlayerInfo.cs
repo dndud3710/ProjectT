@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -13,18 +14,32 @@ public class PlayerInfo : MonoBehaviour
 
     private int[] maxEXP = { 100, 200, 300, 400, 500 };
 
-    
-    private void Awake()
-    {
-       
-    }
-    private void OnEnable()
-    {
-        
-    }
+    private int damage;
+    private int Maxhealth;
+
+    private EquipItem[] equips;
+
     private void Start()
     {
-        GameManager.Instance.initEvent?.Invoke();
+        GameManager.Instance.getItem("검");
+        GameManager.Instance.getItem("총");
+    }
+
+    public void setEquipItem(EquipItem e_)
+    {
+        if (equips[(int)e_.type] == null)
+        {
+            equips[(int)e_.type] = e_;
+            GameManager.Instance.deleteItem(e_.gameObject);
+        }
+        else
+        {
+            //이미 착용하고잇는 아이템을 인벤토리에 추가하고 바꿔낌
+            GameManager.Instance.getItem(equips[(int)e_.type].ItemName);
+            equips[(int)e_.type] = e_;
+        }
+        //렌더링 최신화
+        
     }
 
    public   void StartGameCoin()

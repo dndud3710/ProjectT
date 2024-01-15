@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
     public Sprite sprite2;
     public Sprite sprite3;
 
+    public EquipUI equipUI;
+    public GameObject SlotPrefab;
+    public GameObject[] equipItemsPrefabs;
+    List<GameObject> EquipInventory;
+    Dictionary<string, GameObject> EquipItemsDictionary;
+
     private void Awake()
     {
         if (Instance == null)
@@ -65,7 +71,30 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
 
     }
+    #region 인벤토리
 
+    public void getItem(string s)
+    {
+        GameObject g_ = getItemObject(s);
+        //인벤토리에 획득
+
+        if (g_.GetComponent<EquipItem>())
+        {
+            EquipInventory.Add(g_);
+            equipUI.AddSlot(g_);
+        }
+    }
+    public void deleteItem(GameObject g_)
+    {
+        if (g_.GetComponent<EquipItem>())
+        {
+            GameObject gg_= equipUI.Slots.Find(g => g_);
+            equipUI.Slots.Remove(g_);
+            EquipInventory.Remove(g_);
+            Destroy(gg_);
+        }
+    }
+    #endregion
 
     #region 씬 초기화
     void MainSceneInit()
@@ -103,12 +132,15 @@ public class GameManager : MonoBehaviour
     void varInit()
     {
         Stagelevel = 1;
+        
     }
     void DictionaryInit()
     {
         
         StageName = new Dictionary<int, string>();
         StageSprite = new Dictionary<string, Sprite>();
+        EquipItemsDictionary = new Dictionary<string, GameObject>();
+        EquipInventory = new List<GameObject>();
 
         StageName.Add(1, "야생 거리");
         StageName.Add(2, "도시 공원");
@@ -117,6 +149,12 @@ public class GameManager : MonoBehaviour
         StageSprite.Add(StageName[1], sprite1);
         StageSprite.Add(StageName[2], sprite2);
         StageSprite.Add(StageName[3], sprite3);
+
+        foreach(GameObject g_ in equipItemsPrefabs)
+        {
+            EquipItem etype_ = g_.GetComponent<EquipItem>();
+            EquipItemsDictionary.Add(etype_.ItemName, g_);
+        }
     }
     #endregion
 
@@ -129,6 +167,10 @@ public class GameManager : MonoBehaviour
     public Sprite getStageImage(int a)
     {
         return StageSprite[StageName[a]];
+    }
+    public GameObject getItemObject(string s)
+    {
+        return EquipItemsDictionary[s];
     }
     #endregion
     

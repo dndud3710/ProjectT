@@ -328,6 +328,7 @@ Transform:
   - {fileID: 1420585036950240189}
   - {fileID: 6490757242057434809}
   - {fileID: 8091339574811229150}
+  - {fileID: 5615015974747746647}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -344,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level: 1
-  maxExp: 0
+  maxExp: 
   curExp: 0
   maxHP: 100
   currentHP: 0
@@ -356,8 +357,7 @@ MonoBehaviour:
   animator: {fileID: 331416482231298108}
   ShotPointAngle: {fileID: 6490757242057434809}
   ShotPoint: {fileID: 3975662826678733648}
-  Skills: []
-  col: {fileID: 6594338934629225324}
+  HaveSkill: {fileID: 5615015974747746647}
 --- !u!50 &3082007931848390427
 Rigidbody2D:
   serializedVersion: 4
@@ -725,6 +725,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &8406549990137907259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5615015974747746647}
+  m_Layer: 0
+  m_Name: Skills
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5615015974747746647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8406549990137907259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3082007931848390426}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8729638960883502440
 GameObject:
   m_ObjectHideFlags: 0

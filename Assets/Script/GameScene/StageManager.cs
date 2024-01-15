@@ -24,28 +24,32 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public GameObject JoyStick;
     public CinemachineVirtualCamera VirtualCameara_;
-    public TextMeshProUGUI TimeText;
-    public TextMeshProUGUI GoldText;
-    public TextMeshProUGUI KillText;
-    private int Killnum;
-    public TextMeshProUGUI LevelText;
     public BoxCollider2D[] CameraWall;//순서대로 0;좌,1:우,2:위,3:아래
-    public GameObject StageSkills;
+
+    public Transform UISkillParent;
+    public Transform WorldSkillParent;
 
     public Failed FailedPanel;//실패했을 시 나타나는 UI 
     public GameObject deadPArticle;
-
-
-    /// <summary>
-    /// 스킬들
-    /// </summary>
-    public GameObject[] Skill;
-
+    public GameState StateUI;//시간,exp바,획득골드,킬상태를 보여주는 UI관리오브젝트
+    public SkillManage skillmanager;
 
 
     Stopwatch st;
     const short  zero_ = 0;
+    private int Killnum;
 
+    /// <summary>
+    /// 아이템 관련
+    /// </summary>
+    Dictionary<int, int> ExpItemGetExp; //색마다 다른 exp 얻는 값 정함
+    Dictionary<int, GameObject> Items;
+    public GameObject[] IngameItems;
+    List<InGameItem> stageInItems; //스테이지에 떨어져 있는 아이템들, 자석아이템먹으면 전부 먹게되게만듦
+    //여기서 ingameItem클래스로 list를 둔 이유는 gameobject로 하면 자석아이템을 먹었을때 많은 아이템들을 Use하고 destroy할때
+    //getcomponent IngameItem을 순간적으로 많이해야되기 때문이다, ingameitem클래스를가지고 있는 gameobject를 찾아야할때도 있지만
+    //자석만큼 많이 getcomponent를 할때가 오지않아서 이렇게 하였다
+    
 
     //파티클 나중에 바꿀거.
     public void deadPrticlePlay(Transform TF)
@@ -83,10 +87,11 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
-            Instance = this;
+        Instance = this;
         Killnum = 0;
         Player = Instantiate(playerPrefs);
         Player.transform.position = Vector2.zero;
+        InitItem();
     }
     private void Start()
     {
@@ -98,10 +103,7 @@ public class StageManager : MonoBehaviour
 
         CameraWallInit();
     }
-    private void Update()
-    {
-        TimeText.text = $"{st.Elapsed.ToString(@"mm\:ss").Replace(":", " : ")}";
-    }
+   
 
 
 
@@ -120,10 +122,53 @@ public class StageManager : MonoBehaviour
         SceneManager.LoadScene("Main Scene");
     }
 
+
     public void Monsterkill()
     {
         Killnum++;
-        KillText.text = $"{Killnum}";
+        StateUI.setKillText(Killnum);
+    }
+    public Stopwatch getTime() //인게임 stateUI에서 가져올 시간 stopwatch
+    {
+        return st;
     }
 
+    #region 아이템 관련
+    //아이템 관련
+    void InitItem()
+    {
+        ExpItemGetExp = new Dictionary<int, int>();
+        Items = new Dictionary<int, GameObject>();
+        stageInItems = new List<InGameItem>();
+        ExpItemGetExp.Add(1, 4);
+        ExpItemGetExp.Add(2, 8);
+        ExpItemGetExp.Add(3, 14);
+
+        Items.Add((int)EInGameItemType.EXP1, IngameItems[0]);
+        Items.Add((int)EInGameItemType.EXP2, IngameItems[1]);
+        Items.Add((int)EInGameItemType.EXP3, IngameItems[2]);
+    }
+
+    public int getItemExp(int expitemLevel)
+    {
+        if (expitemLevel < 0 && expitemLevel > 3)
+            return 0;
+        return ExpItemGetExp[expitemLevel];
+    }
+    
+    //몬스터가 disable될때 거기서 호출
+    public void makeItem(Transform t_,EInGameItemType e_)
+    {
+        GameObject g_ = Instantiate(Items[(int)e_], ObjectPool.Instance.transform); //그냥 오브젝트풀에다한거
+        g_.transform.position = t_.position;
+        stageInItems.Add(g_.GetComponent<InGameItem>());
+    }
+
+    //플레이어가 아이템을 먹었을시에 발동 ,몬스터가 죽는건 오브젝트풀링판정이니 오브젝트풀에서 작동
+    public void deleteInGameItemList(GameObject g_)
+    {
+        InGameItem igi_ = g_.GetComponent<InGameItem>();
+        stageInItems.Remove(igi_);
+    }
+    #endregion
 }

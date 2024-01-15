@@ -44,11 +44,11 @@ public class GunFire : ActiveSkills
             {
                 c--;
                 yield return new WaitForSeconds(0.2f);
-                GameObject g = Instantiate(Bullet);
+                GameObject g = Instantiate(Bullet, ParentTransform);
                 GunFireMove b = g.GetComponent<GunFireMove>();
                 
                 b.setThrowSkills(StageManager.Instance.playerScript.getDamage() * 2,
-                    Duration, ClearPrefabsTime, Speed
+                    Duration, ClearPrefabsTime, Speed, pointtype
                     );
                 g.transform.position = getPlayerTF().position;
                 currentRotation = getPlayerRot().rotation;

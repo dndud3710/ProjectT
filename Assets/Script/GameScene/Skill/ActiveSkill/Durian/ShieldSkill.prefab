@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5afd742498ab5141b62d37000c90a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointtype: 0
   count: 1
   coolDown: 4
-  Duration: 20
+  Duration: -10
   ClearPrefabsTime: 20
   Speed: 2
+  SkillImage: {fileID: 21300000, guid: a9e1ae3f876a5455c9677a087c67e5ee, type: 3}
+  SkillName: "\uC274\uB4DC"
+  Description: "\uC2E4\uB4DC \uD06C\uAE30 \uC99D\uAC00"
   Shield: {fileID: 6019531532557152274, guid: a3898aace0e26c3458449c0d791a40cb, type: 3}

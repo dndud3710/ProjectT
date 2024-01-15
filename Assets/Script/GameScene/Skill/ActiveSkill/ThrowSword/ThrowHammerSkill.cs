@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ThrowHammerSkill : ActiveSkills
 {
+    /// <summary>
+    /// 항상 공통된것은 ActiveSkills에 
+    /// 예를들어 UI World좌표에 따른 Instantiate부모 설정을 다르게하려면 부모에서 Transform을 하나 선언한뒤 그것을 UI WOrld에따라 object를 다르게
+    /// 설정한 뒤에 여기서는 모든 activeskill을 상속하는 스킬들이 왠만하면 똑같은 코드로 만들어야함
+    /// </summary>
+
     //해머가 돌아가면서 몬스터맞추면 방향을 틈 -> 탕특 축구공과 같음
     public GameObject HammerPrefabs;
     //이 오브젝트가 null이 될 때는 해머가 파괴되었을때
@@ -64,12 +70,12 @@ public class ThrowHammerSkill : ActiveSkills
                 {
                     //스킬 재사용 시간
                     yield return new WaitForSeconds(0.1f);
-                    GameObject g = Instantiate(HammerPrefabs, StageManager.Instance.StageSkills.transform);
+                    GameObject g = Instantiate(HammerPrefabs, ParentTransform) ;
                     cooldowngo.Add(g);
                     HammerMove b = g.GetComponent<HammerMove>();
                     g.transform.position = getPlayerTF().position;
                     b.setThrowSkills(StageManager.Instance.playerScript.getDamage(),
-                    Duration, ClearPrefabsTime, Speed
+                    Duration, ClearPrefabsTime, Speed, pointtype
                     );
                     c--;
                 }

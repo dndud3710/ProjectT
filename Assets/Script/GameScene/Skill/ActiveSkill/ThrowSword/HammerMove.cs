@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HammerMove : ThrowSkill
 {
-    // Start is called before the first frame update
+    
+    
     CircleCollider2D cr;
     protected override void Start()
     {

@@ -39,12 +39,12 @@ public class ShieldThrowSkill : ActiveSkills
             {
                 //스킬 재사용 시간
                 yield return new WaitForSeconds(coolDown);
-                GameObject g = Instantiate(Shield,StageManager.Instance.StageSkills.transform);
+                GameObject g = Instantiate(Shield,ParentTransform);
                 startCooldown = g;
                 DurianMove b = g.GetComponent<DurianMove>();
                 g.transform.position = getPlayerTF().position;
                 b.setThrowSkills(StageManager.Instance.playerScript.getDamage() * 2,
-                Duration, ClearPrefabsTime, Speed
+                Duration, ClearPrefabsTime, Speed, pointtype
                 );
                 
                 

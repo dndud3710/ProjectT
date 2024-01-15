@@ -17,9 +17,12 @@ public class MainChapterSelectInit : MonoBehaviour
     }
     public void Init()
     {
-        
+
         StageName.text = $"{playerinfo.getCurStage()}. {GameManager.Instance.getStageName(playerinfo.getCurStage())}";
-        StageImage.sprite= GameManager.Instance.getStageImage(playerinfo.getCurStage());
-        
+        StageImage.sprite = GameManager.Instance.getStageImage(playerinfo.getCurStage());
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.initEvent -= Init;
     }
 }

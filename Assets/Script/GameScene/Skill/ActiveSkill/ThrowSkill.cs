@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ThrowSkill : MonoBehaviour
 {
-    [Tooltip("UI기준 좌표인지 World기준 좌표인지")]
-    public PointType pt;
+    
+    private PointType pt;
     private int damage;
     [Tooltip("오브젝트 관통 횟수 (-10일경우 무한)")]
     private int Du;
@@ -18,6 +18,7 @@ public class ThrowSkill : MonoBehaviour
     RectTransform rt;
     protected Vector2 forwardgo;
 
+  
     protected virtual void Start()
     {
         Destroy(gameObject, ClearPrefabsTime);
@@ -57,12 +58,13 @@ public class ThrowSkill : MonoBehaviour
     {
         Du = -1;
     }
-    public void setThrowSkills(int damage,int dur, float t , float speed)
+    public void setThrowSkills(int damage,int dur, float t , float speed,PointType pr)
     {
         this.damage = damage;
         this.Du = dur;
         ClearPrefabsTime = t;
         this.Speed = speed;
+        pt = pr;
     }
     /// <summary>
     /// 공격 판정

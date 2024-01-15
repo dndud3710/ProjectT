@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SmallMonster : Monster
 {
+    
     bool attackOnOff;
     Coroutine c;
     Rigidbody2D rb;

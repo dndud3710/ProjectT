@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    /// <summary>
+    /// 게임을 만들면서 느낀점
+    /// objectpool의 설계를 잘해야할 것 같다
+    /// 예를들어 몬스터는 잘 만들었지만, exp아이템이라던지 많이 나올거같은 것들까지 신경쓰면서 설계했었어야햇다
+    /// </summary>
     public static ObjectPool Instance;
     //스테이지 프리팹을 가져와서 해당 몬스터들을 소환
     public GameObject[] StageMonsters;
@@ -75,8 +80,9 @@ public class ObjectPool : MonoBehaviour
     public void DeadMonster(int wave,GameObject monsterobj)
     {
         if (AliveMonsters[wave].Count > 0)
-        {
-            
+        { 
+            StageManager.Instance.makeItem(monsterobj.transform,monsterobj.GetComponent<Monster>().rootItem);
+            StageManager.Instance.deleteInGameItemList(monsterobj);
             AliveMonsters[wave].Remove(monsterobj);
             DeadMonsters[wave].Add(monsterobj);
             monsterobj.SetActive(false);

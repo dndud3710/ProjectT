@@ -49,11 +49,11 @@ public class MisiileSkill : ActiveSkills
             {
                 c--;
                 yield return new WaitForSeconds(1f);
-                GameObject g = Instantiate(Bullet);
+                GameObject g = Instantiate(Bullet, ParentTransform);
                 MissileMove b = g.GetComponent<MissileMove>();
 
                 b.setThrowSkills(StageManager.Instance.playerScript.getDamage(),
-                    Duration, ClearPrefabsTime, Speed
+                    Duration, ClearPrefabsTime, Speed, pointtype
                     );
                 g.transform.position = getPlayerTF().position;
                 currentRotation = SearchMonster();

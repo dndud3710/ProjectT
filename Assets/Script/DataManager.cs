@@ -12,6 +12,10 @@ public class DataManager : MonoBehaviour
     /// </summary>
     public GameObject[] ActiveSkillsObj;
     Dictionary<int, GameObject> ActiveSkillDictionary;
+    Dictionary<int, string> ActiveSkillNames;
+    Dictionary<int, Sprite> ActiveSkillSprite;
+    Dictionary<int, string> ActiveSkillDiscription;
+
 
     private void Awake()
     {
@@ -34,9 +38,17 @@ public class DataManager : MonoBehaviour
     void Init()
     {
         ActiveSkillDictionary = new Dictionary<int, GameObject>();
-
-        for(int i=0;i< ActiveSkillsObj.Length;i++)
+        ActiveSkillNames = new Dictionary<int, string>();
+        ActiveSkillSprite = new Dictionary<int, Sprite>();
+        ActiveSkillDiscription = new Dictionary<int, string>();
+        for (int i = 0; i < ActiveSkillsObj.Length; i++)
+        {
             ActiveSkillDictionary.Add(i, ActiveSkillsObj[i]);
+            IngameSkill ing_ = ActiveSkillsObj[i].GetComponent<IngameSkill>();
+            ActiveSkillNames.Add(i, ing_.ESkillName);
+            ActiveSkillSprite.Add(i, ing_.ESkillImage);
+            ActiveSkillDiscription.Add(i, ing_.EDiscription);
+        }
         
     }
 
@@ -44,6 +56,7 @@ public class DataManager : MonoBehaviour
     {
         return ActiveSkillDictionary[(int)type];
     }
+
     #endregion
 
 

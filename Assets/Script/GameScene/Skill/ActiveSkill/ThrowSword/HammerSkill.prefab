@@ -44,9 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04df350cb909cd64aa2887c428119c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SkillName: "\uD574\uBA38"
   count: 1
   coolDown: 2
   Duration: 8
   ClearPrefabsTime: 20
   Speed: 2
+  SkillImage: {fileID: 21300000, guid: a01dbe1d0cc6a4539bb8776a568a63a3, type: 3}
+  Description: "\uB9DD\uCE58 \uAC1C\uC218 \uC99D\uAC00"
   HammerPrefabs: {fileID: 6631041480817787831, guid: 40df78bff4ab7d84aa09cff689bcbad8, type: 3}

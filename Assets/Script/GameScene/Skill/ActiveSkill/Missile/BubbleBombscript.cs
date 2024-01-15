@@ -19,7 +19,6 @@ namespace EpicToonFX
         {
             if (collision.CompareTag("Monster"))
             {
-                print("µ¥¹ÌÁö");
                 Monster monster = collision.GetComponent<Monster>();
                 monster.TakeDamage((int)((float)(StageManager.Instance.playerScript.damage)*0.7f));
             }

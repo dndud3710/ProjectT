@@ -47,10 +47,10 @@ public class SwordSlash : ActiveSkills
             while (c > 0)
             {
                 c--;
-                GameObject g = Instantiate(SlashPrefabs);
+                GameObject g = Instantiate(SlashPrefabs, ParentTransform);
                 SwordMove b = g.GetComponent<SwordMove>();
                 b.setThrowSkills(StageManager.Instance.playerScript.getDamage(),
-                   Duration, ClearPrefabsTime, Speed
+                   Duration, ClearPrefabsTime, Speed, pointtype
                    );
                 g.transform.position = getPlayerTF().position;
                 g.transform.rotation = currentRotation;

@@ -9,6 +9,13 @@ public interface IStages
 {
     public GameObject[] getMonsters();
 }
+public interface IngameSkill
+{
+    public Sprite ESkillImage { get; }
+    public string ESkillName { get; }
+    public string EDiscription { get; }
+    void Use() { } //패시브도 레벨업하거나 얻는순간 Use로 하게하려고 만듦
+}
 
 /// <summary>
 /// enum 모음
@@ -24,5 +31,25 @@ public enum EActiveSkillType
 public enum PointType
 {
     UI,
-    World
+    World,
+}
+
+public enum EInGameItemType
+{
+    EXP1,
+    EXP2,
+    EXP3,
+    Heal,
+    Magnet,
+    Money
+}
+
+public enum EEquipItemType
+{
+    Weapon,
+    Accessories,
+    clothes,
+    pants,
+    belt,
+    helmet
 }

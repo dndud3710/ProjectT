@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-
+    public EInGameItemType rootItem;
     protected Transform Player_tf;
     protected Player player_sc;
 

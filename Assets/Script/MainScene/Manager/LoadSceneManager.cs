@@ -19,12 +19,14 @@ public class LoadSceneManager : MonoBehaviour
     private Image panelImage;
 
 
+    public GameObject PlayerStateUI;
     public GameObject MainGameObject;
     public GameObject ChapterSelectGameObject;
 
     public Transform CameraTF;
     public Transform MainTF;
     public Transform ChapterSelectTF;
+    public Transform EquipTF;
 
     public PlayerInfo palyerinfo;
 
@@ -76,6 +78,7 @@ public class LoadSceneManager : MonoBehaviour
     public void ChapterSelectScene()
     {
         CameraTF.position =new Vector3(ChapterSelectTF.position.x,ChapterSelectTF.position.y,CameraTF.position.z);
+        PlayerStateUI.SetActive(false);
         MainGameObject.SetActive(false);
         ChapterSelectGameObject.SetActive(true);
         AudioManager.Instance.MenuBeepPlay();
@@ -84,8 +87,16 @@ public class LoadSceneManager : MonoBehaviour
     {
         CameraTF.position = new Vector3(MainTF.position.x, MainTF.position.y, CameraTF.position.z);
         MainGameObject.SetActive(true);
+        PlayerStateUI.SetActive(true);
         ChapterSelectGameObject.SetActive(false);
         GameManager.Instance.initEvent?.Invoke();
         AudioManager.Instance.MenuBeepPlay();
+    }
+    //장비창으로 넘어가기
+    public void EquipScene()
+    {
+        CameraTF.position = new Vector3(EquipTF.position.x, MainTF.position.y, CameraTF.position.z);
+        MainGameObject.SetActive(false);
+
     }
 }

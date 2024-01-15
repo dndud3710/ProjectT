@@ -36,4 +36,9 @@ public class PlayerInfoUI : MonoBehaviour
         PowerText.text = $"{playerinfo.getCurCoin()} / {playerinfo.getMaxCoin()}";
         MoneyText.text = $"{playerinfo.getMoney()}";
     }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.initEvent -= Init;
+    }
 }

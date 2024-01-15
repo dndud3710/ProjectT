@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     Vector2 Dir;
     [Header("플레이어 정보")]
     public int Level;
-    public int maxExp;
+    public int[] maxExp;
     public int curExp;
     public int maxHP;
     public int currentHP;
@@ -26,9 +27,11 @@ public class Player : MonoBehaviour
     public Transform ShotPointAngle;
     public Transform ShotPoint;
 
-    public List<GameObject> Skills;
+    //선택한 스킬들은 자식오브젝트인, haveSkills에 들어간다
+    //haveskills에 들어가면서 List에 드렁가는데 패시브는 얻자마자 효과가 발동되고,
+    public Transform HaveSkill;
+    private List<IngameSkill> skillList;
 
-    public BoxCollider2D col;
     private void Awake()
     {
 
@@ -36,25 +39,19 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Init();
-        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.SwordSlash));
-        GameObject g = Instantiate(Skills[0]);
-        g.GetComponent<ActiveSkills>().Use();
-        Invoke("starttt", 0.8f);
-        float verticalSize = Camera.main.orthographicSize * 2.0f;
-        float horizontalSize = verticalSize * Camera.main.aspect;
-        col.size = new Vector2(horizontalSize, verticalSize);
-    }
-    void starttt()
-    {
-        Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.BubbleBomb));
-        GameObject g = Instantiate(Skills[1]);
-        g.GetComponent<ActiveSkills>().Use();
+        //Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.SwordSlash));
+        //GameObject g = Instantiate(Skills[0]);
+        //g.GetComponent<ActiveSkills>().Use();ㄴ
     }
     void Init()
     {
+        curExp = 0;
+        maxExp = new int[6] { 100, 200, 300, 400, 500, 600 };
         HpBar.maxValue = maxHP;
         HpBar.value = maxHP;
         currentHP = maxHP;
+        //경험치바 맥스 초기화
+        StageManager.Instance.StateUI.setExpBar(true);
     }
     private void FixedUpdate()
     {
@@ -155,4 +152,39 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+    #region EXP
+    public void getEXP(int gexp)
+    {
+        curExp += gexp;
+        StageManager.Instance.StateUI.setExpBar(false);
+        LevelUp();
+    }
+    void LevelUp()
+    {
+        if (curExp >= maxExp[Level-1])
+        {
+            curExp = maxExp[Level - 1] - curExp;
+            Level++;
+            StageManager.Instance.StateUI.setExpBar(true);
+            StageManager.Instance.StateUI.setLevelText(Level);
+            StageManager.Instance.skillmanager.OnLevelUpSelectSkills();
+        }
+    }
+    #endregion
+
+    public void GetSkill(GameObject g_)
+    {
+        GameObject gg_ = Instantiate(g_, HaveSkill.transform);
+        IngameSkill igs_ =  gg_.GetComponent<IngameSkill>();
+        igs_.Use();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent<InGameItem>(out InGameItem igi_))
+        {
+            //INgameItem을 따로 두는 이유, 이렇게 게임중일때 먹었을때 Use한번에하려고
+            igi_.Use();
+        }
+    }
 }
