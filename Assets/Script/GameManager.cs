@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -33,10 +35,15 @@ public class GameManager : MonoBehaviour
     public Sprite sprite3;
 
     public EquipUI equipUI;
+
     public GameObject SlotPrefab;
-    public GameObject[] equipItemsPrefabs;
+    public GameObject[] EquipItemPrefabs; //아이템 프리팹들
+
+    [HideInInspector] public EquipItem[] equips;
     List<GameObject> EquipInventory;
     Dictionary<string, GameObject> EquipItemsDictionary;
+    [HideInInspector]
+    public List<EquipItem> EquipWeaponsList { get; private set; }
 
     private void Awake()
     {
@@ -59,6 +66,7 @@ public class GameManager : MonoBehaviour
         //씬마다 다른 로딩은 함수에서
 
     }
+    
     public void PlayerInfoInit()
     {
         PlayerPrefs.SetInt("Stage", 1);
@@ -69,7 +77,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("PlayerCurCoin", 20);
         PlayerPrefs.SetInt("PlayerMaxCoin", 20);
         PlayerPrefs.Save();
-
     }
     #region 인벤토리
 
@@ -84,12 +91,14 @@ public class GameManager : MonoBehaviour
             equipUI.AddSlot(g_);
         }
     }
+    //t_가 true일때는 object를 영구히 삭제
     public void deleteItem(GameObject g_)
     {
         if (g_.GetComponent<EquipItem>())
         {
-            GameObject gg_= equipUI.Slots.Find(g => g_);
-            equipUI.Slots.Remove(g_);
+            //slots 리스트 안에있는 slot오브젝트의 slotscript스크립트의 item이 g_와 같다면
+            GameObject gg_ = equipUI.getSlot(g_);
+            equipUI.Slots.Remove(gg_);
             EquipInventory.Remove(g_);
             Destroy(gg_);
         }
@@ -110,7 +119,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //초기화 영역
-        if(SceneNum < 255)
+        if (SceneNum < 255)
         {
             switch(SceneNum)
             {
@@ -132,7 +141,7 @@ public class GameManager : MonoBehaviour
     void varInit()
     {
         Stagelevel = 1;
-        
+        equips = new EquipItem[Enum.GetValues(typeof(EEquipItemType)).Length];
     }
     void DictionaryInit()
     {
@@ -141,7 +150,7 @@ public class GameManager : MonoBehaviour
         StageSprite = new Dictionary<string, Sprite>();
         EquipItemsDictionary = new Dictionary<string, GameObject>();
         EquipInventory = new List<GameObject>();
-
+        EquipWeaponsList = new List<EquipItem>();
         StageName.Add(1, "야생 거리");
         StageName.Add(2, "도시 공원");
         StageName.Add(3, "지하 주차장");
@@ -150,10 +159,14 @@ public class GameManager : MonoBehaviour
         StageSprite.Add(StageName[2], sprite2);
         StageSprite.Add(StageName[3], sprite3);
 
-        foreach(GameObject g_ in equipItemsPrefabs)
+        foreach(GameObject g_ in EquipItemPrefabs)
         {
             EquipItem etype_ = g_.GetComponent<EquipItem>();
             EquipItemsDictionary.Add(etype_.ItemName, g_);
+            if(etype_.type == EEquipItemType.Weapon)
+            {
+                EquipWeaponsList.Add(etype_);
+            }
         }
     }
     #endregion

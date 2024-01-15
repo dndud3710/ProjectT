@@ -116,3 +116,4 @@ MonoBehaviour:
   ItemImage: {fileID: 1992299580292635533}
   Health: 0
   Damage: 45
+  skilltype: 1

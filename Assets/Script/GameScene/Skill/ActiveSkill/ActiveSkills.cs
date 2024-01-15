@@ -19,7 +19,7 @@ public class ActiveSkills : MonoBehaviour , IngameSkill
     public float ClearPrefabsTime = 20f;
     [Tooltip("오브젝트가 날라가는 속도")]
     public float Speed = 2f;
-
+    private int SkillLevel;
     //만약 UI면 World면 canvas skill을 부모로할건지, 플레이어의 skill을 부모로 할건지
     protected Transform ParentTransform;
 
@@ -39,6 +39,7 @@ public class ActiveSkills : MonoBehaviour , IngameSkill
 
     protected virtual void Start()
     {
+        SkillLevel = 1;
         PlayerTF = StageManager.Instance.Player.transform;
         PlayerRot = StageManager.Instance.playerScript.getShotPointAngle();
         if(pointtype == PointType.UI)
@@ -51,7 +52,8 @@ public class ActiveSkills : MonoBehaviour , IngameSkill
         }
     }
     public virtual void Use() { }
-
+    public virtual void SkillLevelUp() { SkillLevel++; }
+    
     protected Transform getPlayerTF()
     {
         return PlayerTF;

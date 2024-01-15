@@ -42,6 +42,24 @@ public class Player : MonoBehaviour
         //Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.SwordSlash));
         //GameObject g = Instantiate(Skills[0]);
         //g.GetComponent<ActiveSkills>().Use();ㄴ
+
+
+        //플레이어가 어떤 무기를 장착했는지에 따라 초기 스킬을 설정
+        //일단 gamemanager에서 weapon만 따로 List에 담은 상태, 여기서 특정 웨폰들이 어떻게 특정스킬을 지목하게 할 것인가
+        if (GameManager.Instance.equips[0] != null)
+        {
+            foreach(EquipItem eq_ in GameManager.Instance.EquipWeaponsList) 
+            { 
+                if (GameManager.Instance.equips[0] == eq_)
+                {
+                    GetSkill(DataManager.Instance.getActiveSkillObject(eq_.gameObject.GetComponent<WeaponSkillType>().getType()));
+                }    
+
+            }
+
+        }
+
+
     }
     void Init()
     {
@@ -52,6 +70,7 @@ public class Player : MonoBehaviour
         currentHP = maxHP;
         //경험치바 맥스 초기화
         StageManager.Instance.StateUI.setExpBar(true);
+        skillList = new List<IngameSkill>();
     }
     private void FixedUpdate()
     {
@@ -175,8 +194,22 @@ public class Player : MonoBehaviour
 
     public void GetSkill(GameObject g_)
     {
+        IngameSkill igs_ = g_.GetComponent<IngameSkill>();
+        foreach (IngameSkill i in skillList)
+        {
+            if(igs_.ESkillName == i.ESkillName)
+            {
+                //이미 있을경우
+                print("스킬레벨업!");
+                i.SkillLevelUp();
+                return;
+            }
+        }
+        print("새로운 스킬 획득");
         GameObject gg_ = Instantiate(g_, HaveSkill.transform);
-        IngameSkill igs_ =  gg_.GetComponent<IngameSkill>();
+        igs_ = gg_.GetComponent<IngameSkill>();
+
+        skillList.Add(igs_);
         igs_.Use();
     }
     private void OnTriggerEnter2D(Collider2D collision)

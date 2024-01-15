@@ -25,6 +25,12 @@ public class SwordSlash : ActiveSkills
     {
         StartCoroutine(AttackSwordSlashStart());
     }
+    public override void SkillLevelUp()
+    {
+        base.SkillLevelUp();
+
+        count++;
+    }
     /// <summary>
     /// 코루틴 패턴
     /// </summary>

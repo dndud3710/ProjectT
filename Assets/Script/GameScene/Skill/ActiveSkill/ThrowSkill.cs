@@ -60,7 +60,7 @@ public class ThrowSkill : MonoBehaviour
     }
     public void setThrowSkills(int damage,int dur, float t , float speed,PointType pr)
     {
-        this.damage = damage;
+        this. damage= damage;
         this.Du = dur;
         ClearPrefabsTime = t;
         this.Speed = speed;

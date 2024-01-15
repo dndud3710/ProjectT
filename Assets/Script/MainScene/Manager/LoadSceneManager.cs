@@ -91,12 +91,13 @@ public class LoadSceneManager : MonoBehaviour
         ChapterSelectGameObject.SetActive(false);
         GameManager.Instance.initEvent?.Invoke();
         AudioManager.Instance.MenuBeepPlay();
+        GameManager.Instance.equipUI.gameObject.SetActive(false);
     }
     //장비창으로 넘어가기
     public void EquipScene()
     {
         CameraTF.position = new Vector3(EquipTF.position.x, MainTF.position.y, CameraTF.position.z);
         MainGameObject.SetActive(false);
-
+        GameManager.Instance.equipUI.gameObject.SetActive(true);
     }
 }

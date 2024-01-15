@@ -17,29 +17,60 @@ public class PlayerInfo : MonoBehaviour
     private int damage;
     private int Maxhealth;
 
-    private EquipItem[] equips;
+    
 
     private void Start()
     {
+        damage = 0;
+        Maxhealth = 0;
+
         GameManager.Instance.getItem("검");
         GameManager.Instance.getItem("총");
     }
-
+    void changeStat(EquipItem eq_,ref int damage_,ref int maxhealth_,bool inde)
+    {
+        eq_.getStat(out int a, out int b);
+        if (inde)
+        {
+            //더하기
+            damage_ += a;
+            maxhealth_ += b;
+        }
+        if (!inde)
+        {
+            //더하기
+            damage_ -= a;
+            maxhealth_ -= b;
+        }
+    }
     public void setEquipItem(EquipItem e_)
     {
-        if (equips[(int)e_.type] == null)
+        //코드 개더러움 다시는 이렇게 짜면 안됨
+        EquipItem[] eqarray_ = GameManager.Instance.equips;
+        if (eqarray_[(int)e_.type] == null)
         {
-            equips[(int)e_.type] = e_;
+            eqarray_[(int)e_.type] = e_;
+            changeStat(eqarray_[(int)e_.type],ref damage,ref Maxhealth, true);
+            GameManager.Instance.equipUI.InitStat(damage, Maxhealth);
             GameManager.Instance.deleteItem(e_.gameObject);
+            print(e_.ItemName);
+            GameManager.Instance.equipUI.EquipImagesInit(e_);
+            print(GameManager.Instance.equips[(int)e_.type]);
         }
         else
         {
             //이미 착용하고잇는 아이템을 인벤토리에 추가하고 바꿔낌
-            GameManager.Instance.getItem(equips[(int)e_.type].ItemName);
-            equips[(int)e_.type] = e_;
+            GameManager.Instance.getItem(eqarray_[(int)e_.type].ItemName);
+            changeStat(eqarray_[(int)e_.type], ref damage, ref Maxhealth, false);
+            eqarray_[(int)e_.type] = e_;
+            changeStat(eqarray_[(int)e_.type], ref damage, ref Maxhealth, true);
+            print(e_.ItemName);
+            GameManager.Instance.equipUI.InitStat(damage, Maxhealth);
+            GameManager.Instance.equipUI.EquipImagesInit(e_);
+            GameManager.Instance.deleteItem(e_.gameObject);
+            eqarray_[(int)e_.type] = e_;
         }
         //렌더링 최신화
-        
     }
 
    public   void StartGameCoin()
@@ -156,5 +187,14 @@ public class PlayerInfo : MonoBehaviour
         maxPlayCoin += coin;
         PlayerPrefs.SetInt("PlayerMaxCoin", maxPlayCoin);
         PlayerPrefs.Save();
+    }
+
+    public int getDamage()
+    {
+        return damage;
+    }
+    public int getHealth()
+    {
+        return Maxhealth;
     }
 }

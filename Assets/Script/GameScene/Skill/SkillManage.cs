@@ -42,20 +42,27 @@ public class SkillManage : MonoBehaviour
         //플레이어는 getSkill로 이것을 받고
         if (num < 0 && num > 2) return;
         StageManager.Instance.playerScript.GetSkill(ThreeSkills[num]);
+        
         OffLevelUpSelectSkills();
     }
     public void OnLevelUpSelectSkills()
     {
-        
+        int ELength = Enum.GetValues(typeof(EActiveSkillType)).Length;
         //레벨업 UI활성화 시키고
         LevelUpUI.SetActive(true);
         panel.SetActive(true);
-
+        bool[] check = new bool[ELength];
         //스킬 입력
         GameObject[] gg_ = new GameObject[ThreeSkills.Length];
-        int enumlen = Enum.GetValues(typeof(EActiveSkillType)).Length;
-        for (int i = 0; i < gg_.Length;i++)
-            gg_[i] = DataManager.Instance.getActiveSkillObject((EActiveSkillType)UnityEngine.Random.Range(0, enumlen));
+        int enumlen = ELength;
+        for (int i = 0; i < gg_.Length; i++)
+        {
+            EActiveSkillType ea_ = (EActiveSkillType)UnityEngine.Random.Range(0, enumlen);
+            if (check[(int)ea_]== true) { i--;continue; } //중복 제거
+            
+            check[(int)ea_]= true;
+            gg_[i] = DataManager.Instance.getActiveSkillObject(ea_);
+        }
         getThreeSkills(gg_);
     }
     private void OffLevelUpSelectSkills()

@@ -8,7 +8,6 @@ public class ShieldThrowSkill : ActiveSkills
     //실드는 카운트 1 고정 (대신 업글시 크기가 늘어남)
     
     public GameObject Shield;
-
     protected override void Start()
     {
         base.Start();
@@ -24,6 +23,12 @@ public class ShieldThrowSkill : ActiveSkills
     public override void Use()
     {
         StartCoroutine(ShieldThrow());
+    }
+    public override void SkillLevelUp()
+    {
+        base.SkillLevelUp();
+
+        Shield.transform.localScale += new Vector3(0.2f, 0.2f,0);
     }
     /// <summary>
     /// 코루틴 패턴

@@ -34,6 +34,12 @@ public class ThrowHammerSkill : ActiveSkills
     {
         StartCoroutine(HammerThrow());
     }
+    public override void SkillLevelUp()
+    {
+        base.SkillLevelUp();
+
+        count++;
+    }
     /// <summary>
     /// 코루틴 패턴
     /// </summary>
@@ -55,7 +61,6 @@ public class ThrowHammerSkill : ActiveSkills
                 //하나라도 null이 아닐경우
                 if (go != null)
                 {
-                    print("현재 있음");
                     ret = false;
                     break;
                 }
@@ -63,7 +68,6 @@ public class ThrowHammerSkill : ActiveSkills
             if (ret)
             {
                 cooldowngo.Clear();
-                print("생성");
                 yield return new WaitForSeconds(coolDown);
                 //남아있는 공이 있을때
                 while (c > 0)

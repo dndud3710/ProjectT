@@ -15,6 +15,13 @@ public interface IngameSkill
     public string ESkillName { get; }
     public string EDiscription { get; }
     void Use() { } //패시브도 레벨업하거나 얻는순간 Use로 하게하려고 만듦
+    void SkillLevelUp() { }
+}
+
+public interface WeaponSkillType
+{
+    //웨폰들은 각자 스킬 스크립트에 이것을 상속하고
+    public EActiveSkillType getType();
 }
 
 /// <summary>

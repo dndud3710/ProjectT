@@ -25,7 +25,12 @@ public class MisiileSkill : ActiveSkills
     {
         StartCoroutine(AttackSwordSlashStart());
     }
+    public override void SkillLevelUp()
+    {
+        base.SkillLevelUp();
 
+        count++;
+    }
     public Quaternion SearchMonster()
     {
         return StageManager.Instance.playerScript.CastAround();
