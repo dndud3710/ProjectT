@@ -74,17 +74,22 @@ public class ThrowSkill : MonoBehaviour
     {
         if (collision.CompareTag("Monster"))
         {
-            Monster monster = collision.GetComponent<Monster>();
-            if (Du != -10)
-            {
-                Du--;
-                monster.TakeDamage(damage);
-            }
-            else
-            {
+            collision.TryGetComponent<Monster>(out Monster monster);
+                if (Du != -10)
+                {
+                    Du--;
+                    monster.TakeDamage(damage);
+                }
+                else
+                {
 
-                monster.TakeDamage(damage);
-            }
+                    monster.TakeDamage(damage);
+                }
+        }
+        else if(collision.CompareTag("ItemChest"))
+        {
+            collision.TryGetComponent<ItemChest>(out ItemChest chest);
+            chest.detroy();
         }
     }
 }

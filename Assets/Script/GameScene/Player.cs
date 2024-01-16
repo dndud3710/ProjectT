@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     public Animator animator;
     public Transform ShotPointAngle;
     public Transform ShotPoint;
+    public CircleCollider2D getItemCircle;
+    public ParticleSystem healparticle;
 
     //선택한 스킬들은 자식오브젝트인, haveSkills에 들어간다
     //haveskills에 들어가면서 List에 드렁가는데 패시브는 얻자마자 효과가 발동되고,
@@ -112,6 +114,10 @@ public class Player : MonoBehaviour
         else if (Dir.x > 0)
             spr.flipX = false;
     }
+    public Vector2 getVector()
+    {
+        return Dir;
+    }
 
     public void ShotPointMove()
     {
@@ -148,6 +154,17 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Hit");
         HpBarUpdate();
         Dead();
+    }
+    public void TakeHeal(float heal_)
+    {
+        currentHP += (int)heal_;
+        if(currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
+        HpBarUpdate();
+        
+        healparticle.Play();
     }
 
     public int getDamage()
@@ -226,19 +243,11 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        print("새로운 스킬 획득");
         GameObject gg_ = Instantiate(g_, HaveSkill.transform);
         igs_ = gg_.GetComponent<IngameSkill>();
 
         skillList.Add(igs_);
         igs_.Use();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.TryGetComponent<InGameItem>(out InGameItem igi_))
-        {
-            //INgameItem을 따로 두는 이유, 이렇게 게임중일때 먹었을때 Use한번에하려고
-            igi_.Use();
-        }
-    }
+    
 }

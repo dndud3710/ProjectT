@@ -60,11 +60,31 @@ public class DataManager : MonoBehaviour
     #endregion
 
 
-
-    //스테이지마다 다른 이름의 스크립트가 있다 ex) stage1 stage2 stage3... 그럼 여기서 특정 gameobject의 스테이지를 불러올 방법은?
+    #region 스테이지 관련
+    /// <summary>
+    /// 스테이지의 정보 불러오기
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
     public GameObject[] getStageMonsters(int num)
     {
         IStages gett= stage[num-1].GetComponent<IStages>();
         return gett.getMonsters();
     }
+    public GameObject getMapTile(int num)
+    {
+        IStages gett = stage[num - 1].GetComponent<IStages>();
+        return gett.getMapTile();
+    }
+    public string getStageName(int num)
+    {
+        IStages gett = stage[num - 1].GetComponent<IStages>();
+        return gett.getStageName();
+    }
+    public Sprite getStageImage(int num)
+    {
+        IStages gett = stage[num - 1].GetComponent<IStages>();
+        return gett.getStageImage();
+    }
+    #endregion
 }

@@ -13,6 +13,7 @@ public class slotScript : MonoBehaviour
     {
         button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(delegate { GameManager.Instance.equipUI.SelectItem(Item); });
+        button.onClick.AddListener(delegate { AudioManager.Instance.MenuBeepPlay(); });
     }
     public void change(Sprite spr_)
     {

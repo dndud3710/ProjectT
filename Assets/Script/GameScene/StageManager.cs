@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance;
-    //스테이지
-    public int StageLevel;
 
     //프리팹
     public GameObject playerPrefs;
@@ -38,6 +37,8 @@ public class StageManager : MonoBehaviour
     Stopwatch st;
     const short  zero_ = 0;
     private int Killnum;
+    private int Coins;
+    public GameObject ItemChests;
 
     /// <summary>
     /// 아이템 관련
@@ -89,6 +90,7 @@ public class StageManager : MonoBehaviour
     {
         Instance = this;
         Killnum = 0;
+        Coins = 0;
         Player = Instantiate(playerPrefs);
         Player.transform.position = Vector2.zero;
         InitItem();
@@ -102,9 +104,11 @@ public class StageManager : MonoBehaviour
         StartCoroutine(MonsterRegen());
 
         CameraWallInit();
+        Instantiate(DataManager.Instance.getMapTile(PlayerPrefs.GetInt("Stage")));
+        
     }
    
-
+    
 
 
     IEnumerator MonsterRegen()
@@ -114,6 +118,7 @@ public class StageManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             for(int i=0;i<5;i++)
                 ObjectPool.Instance.AliveMonster(0);
+            
         }
     }
 
@@ -127,6 +132,11 @@ public class StageManager : MonoBehaviour
     {
         Killnum++;
         StateUI.setKillText(Killnum);
+    }
+    public void getCoins(int coins_)
+    {
+        Coins += coins_;
+        StateUI.setMoneyText(Coins);
     }
     public Stopwatch getTime() //인게임 stateUI에서 가져올 시간 stopwatch
     {
@@ -144,9 +154,10 @@ public class StageManager : MonoBehaviour
         ExpItemGetExp.Add(2, 8);
         ExpItemGetExp.Add(3, 14);
 
-        Items.Add((int)EInGameItemType.EXP1, IngameItems[0]);
-        Items.Add((int)EInGameItemType.EXP2, IngameItems[1]);
-        Items.Add((int)EInGameItemType.EXP3, IngameItems[2]);
+        for (int i = 0; i < IngameItems.Length; i++)
+        {
+            Items.Add(i, IngameItems[i]);
+        }
     }
 
     public int getItemExp(int expitemLevel)
@@ -169,6 +180,17 @@ public class StageManager : MonoBehaviour
     {
         InGameItem igi_ = g_.GetComponent<InGameItem>();
         stageInItems.Remove(igi_);
+    }
+    
+    public List<InGameItem> MagenetItem()
+    {
+        List<InGameItem> magnetList = new List<InGameItem> ();
+        magnetList.Capacity = stageInItems.Count;
+        foreach(InGameItem item_ in stageInItems)
+        {
+            magnetList.Add(item_);
+        }
+        return magnetList;
     }
     #endregion
 }

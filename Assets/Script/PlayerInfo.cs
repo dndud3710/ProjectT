@@ -53,9 +53,7 @@ public class PlayerInfo : MonoBehaviour
             changeStat(eqarray_[(int)e_.type],ref damage,ref Maxhealth, true);
             GameManager.Instance.equipUI.InitStat(damage, Maxhealth);
             GameManager.Instance.deleteItem(e_.gameObject);
-            print(e_.ItemName);
             GameManager.Instance.equipUI.EquipImagesInit(e_);
-            print(GameManager.Instance.equips[(int)e_.type]);
         }
         else
         {
@@ -64,7 +62,6 @@ public class PlayerInfo : MonoBehaviour
             changeStat(eqarray_[(int)e_.type], ref damage, ref Maxhealth, false);
             eqarray_[(int)e_.type] = e_;
             changeStat(eqarray_[(int)e_.type], ref damage, ref Maxhealth, true);
-            print(e_.ItemName);
             GameManager.Instance.equipUI.InitStat(damage, Maxhealth);
             GameManager.Instance.equipUI.EquipImagesInit(e_);
             GameManager.Instance.deleteItem(e_.gameObject);
@@ -86,6 +83,7 @@ public class PlayerInfo : MonoBehaviour
     public void setCurStage(int stage)
     {
         PlayerPrefs.SetInt("Stage", stage);
+        PlayerPrefs.Save();
     }
     //NAME
     public string getName()

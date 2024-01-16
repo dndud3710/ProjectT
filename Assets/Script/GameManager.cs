@@ -29,10 +29,6 @@ public class GameManager : MonoBehaviour
     Dictionary<int, string> StageName; //ex) Key : 1 , Value : 야생 거리
     Dictionary<string, Sprite> StageSprite;
 
-    //임시 이미지
-    public Sprite sprite1;
-    public Sprite sprite2;
-    public Sprite sprite3;
 
     public EquipUI equipUI;
 
@@ -53,7 +49,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
             varInit();
             DictionaryInit();
         }
@@ -63,10 +58,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 자료구조 초기화
+       
         PlayerInfoInit();
         //프리팹 같은 로딩
         //씬마다 다른 로딩은 함수에서
-
+        int num;
+        for (int i = 0; i < DataManager.Instance.stage.Length; i++)
+        {
+            num = i + 1;
+            StageName.Add(num, DataManager.Instance.getStageName(num));
+            StageSprite.Add(StageName[num], DataManager.Instance.getStageImage(num));
+        }
     }
     
     public void PlayerInfoInit()
@@ -139,13 +141,8 @@ public class GameManager : MonoBehaviour
         EquipItemsDictionary = new Dictionary<string, GameObject>();
         EquipInventory = new List<GameObject>();
         EquipWeaponsList = new List<EquipItem>();
-        StageName.Add(1, "야생 거리");
-        StageName.Add(2, "도시 공원");
-        StageName.Add(3, "지하 주차장");
-
-        StageSprite.Add(StageName[1], sprite1);
-        StageSprite.Add(StageName[2], sprite2);
-        StageSprite.Add(StageName[3], sprite3);
+        int num;
+        
 
         foreach(GameObject g_ in EquipItemPrefabs)
         {

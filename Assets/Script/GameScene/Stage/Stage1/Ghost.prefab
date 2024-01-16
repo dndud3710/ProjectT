@@ -84,9 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f6e0a4687de7a449d44364cf42f96a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rootItem: 0
   MonsterID: 1
   Name: "\uC720\uB839"
-  maxHp: 50
+  maxHp: 20
   curHp: 0
   Damage: 3
   Speed: 1

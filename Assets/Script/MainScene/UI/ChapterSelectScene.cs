@@ -50,8 +50,8 @@ public class ChapterSelectScene : MonoBehaviour
     }
     public void nextStage()
     {
-        //스테이지가 3보다 작을때만 클릭 가능
-        if (stage < 3)
+       
+        if (stage < DataManager.Instance.stage.Length)
         {
             stage++;
             StageName.text = $"{stage}. {GameManager.Instance.getStageName(stage)}";

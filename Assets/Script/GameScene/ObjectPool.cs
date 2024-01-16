@@ -37,7 +37,8 @@ public class ObjectPool : MonoBehaviour
     }
     private void Start()
     {
-        StageMonsters = DataManager.Instance.getStageMonsters(GameManager.Instance.SetStageLevel);
+        StageMonsters = DataManager.Instance.getStageMonsters(PlayerPrefs.GetInt("Stage"));
+
         int j = 0;
         foreach(GameObject p in StageMonsters)
         {
@@ -47,7 +48,7 @@ public class ObjectPool : MonoBehaviour
                     AliveMonsters.Add(new List<GameObject>());
                     DeadMonsters[j].Capacity = 100;
                     AliveMonsters[j].Capacity = 100;
-                    for (int i = 0; i < 100; i++)
+                    for (int i = 0; i < 200; i++)
                     {
                         DeadMonsterInit(j, Instantiate(p, transform));
                     }
@@ -82,14 +83,13 @@ public class ObjectPool : MonoBehaviour
         if (AliveMonsters[wave].Count > 0)
         { 
             StageManager.Instance.makeItem(monsterobj.transform,monsterobj.GetComponent<Monster>().rootItem);
-            StageManager.Instance.deleteInGameItemList(monsterobj);
             AliveMonsters[wave].Remove(monsterobj);
             DeadMonsters[wave].Add(monsterobj);
             monsterobj.SetActive(false);
         }
     }
     
-    Vector2 MonsterRegeneratorRange()
+    public Vector2 MonsterRegeneratorRange()
     {
         int r = Random.Range(0, 4);
         Vector2 vec = new Vector2(0,0);

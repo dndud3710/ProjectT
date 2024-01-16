@@ -5035,7 +5035,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5805f672ec38c841ae27ea4839dda4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageLevel: 0
   playerPrefs: {fileID: 3082007931848390429, guid: b539b3104c1e0444ab7dadc51f0266db, type: 3}
   Player: {fileID: 0}
   playerScript: {fileID: 0}
@@ -5052,10 +5051,14 @@ MonoBehaviour:
   deadPArticle: {fileID: 7860296570019955053, guid: ec02a1e6c2eef1048a294188cf79dde9, type: 3}
   StateUI: {fileID: 85185906}
   skillmanager: {fileID: 1648828836}
+  ItemChests: {fileID: 2133683262525577015, guid: 5c01f35d59cd5794bafd75d27c4715d8, type: 3}
   IngameItems:
   - {fileID: 1573925880535425436, guid: 533aaf0effe8edf48891d49b3f22fcc0, type: 3}
   - {fileID: 1573925880535425436, guid: aaeaceef433355541820ba55a91fa681, type: 3}
   - {fileID: 1573925880535425436, guid: 73f8fbb722d6491498e228b05f2adb1a, type: 3}
+  - {fileID: 3781638674070352942, guid: 6a8b146155f9a1f44a2b7f5814b61d47, type: 3}
+  - {fileID: 8284148836630899327, guid: a7d517d634b7b744596ddbc7a11cba84, type: 3}
+  - {fileID: 7400297152219176558, guid: 72cea8c76644b4e4a9af26c04251b448, type: 3}
 --- !u!4 &1510225455
 Transform:
   m_ObjectHideFlags: 0

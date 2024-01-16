@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,10 @@ using UnityEngine;
 public interface IStages
 {
     public GameObject[] getMonsters();
+    public GameObject getMapTile();
+    public string getStageName();
+    public Sprite getStageImage();
+
 }
 public interface IngameSkill
 {
@@ -45,7 +50,7 @@ public enum PointType
 
 public enum EInGameItemType
 {
-    EXP1,
+    EXP1=0,
     EXP2,
     EXP3,
     Heal,

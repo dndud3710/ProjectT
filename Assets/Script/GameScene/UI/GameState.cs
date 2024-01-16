@@ -21,6 +21,7 @@ public class GameState : MonoBehaviour
     {
        //나중에 초가 바뀌면 바꾸는걸로 정리해야함
         getTimeText.text = $"{StageManager.Instance.getTime().Elapsed.ToString(@"mm\:ss").Replace(":", " : ")}";
+       
     }
 
     public void setKillText(int killnum)

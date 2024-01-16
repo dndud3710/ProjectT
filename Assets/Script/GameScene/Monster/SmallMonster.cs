@@ -48,7 +48,12 @@ public class SmallMonster : Monster
             yield return new WaitForSeconds(0.1f);
         }
     }
-
+    public override void TakeDamage(int damage_)
+    {
+        base.TakeDamage(damage_);
+        transform.Translate((transform.position - StageManager.Instance.playerScript.transform.position).normalized * 0.1f);
+      
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

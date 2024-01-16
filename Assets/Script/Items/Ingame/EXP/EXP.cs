@@ -16,4 +16,5 @@ public class EXP : InGameItem
         StageManager.Instance.playerScript.getEXP(StageManager.Instance.getItemExp(Level));
         Destroy(gameObject);
     }
+    
 }

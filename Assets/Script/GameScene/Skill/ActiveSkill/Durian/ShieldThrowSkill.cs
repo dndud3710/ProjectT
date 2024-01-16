@@ -8,6 +8,7 @@ public class ShieldThrowSkill : ActiveSkills
     //실드는 카운트 1 고정 (대신 업글시 크기가 늘어남)
     
     public GameObject Shield;
+    Vector3 scaled;
     protected override void Start()
     {
         base.Start();
@@ -28,6 +29,7 @@ public class ShieldThrowSkill : ActiveSkills
     {
         base.SkillLevelUp();
 
+        //스케일 바꿔야함
         Shield.transform.localScale += new Vector3(0.2f, 0.2f,0);
     }
     /// <summary>

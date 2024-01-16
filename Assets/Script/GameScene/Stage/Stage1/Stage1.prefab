@@ -47,3 +47,6 @@ MonoBehaviour:
   Monsters:
   - {fileID: 1855890463757321753, guid: 8345c884a2ee4c8409cb88bce7664ab3, type: 3}
   - {fileID: 6590848374336766269, guid: 8ac7fc18581839f48a9e67762052d353, type: 3}
+  MapTile: {fileID: 1559932833407142758, guid: 39263b6e08c4d744fa4557669608e91c, type: 3}
+  StageName: "\uC57C\uC0DD\uAC70\uB9AC"
+  StageImage: {fileID: 21300000, guid: 9b7d25aa05e9b3c4f91e836376625671, type: 3}

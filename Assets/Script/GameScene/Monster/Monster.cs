@@ -28,7 +28,7 @@ public class Monster : MonoBehaviour
     {
         Dead();
     }
-    public void TakeDamage(int damage_)
+    public virtual void TakeDamage(int damage_)
     {
         curHp -= damage_;
         animator.SetTrigger("Hit");

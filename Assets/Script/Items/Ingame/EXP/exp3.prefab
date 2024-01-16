@@ -4822,6 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866667164313548641}
   - component: {fileID: 192031030898013454}
+  - component: {fileID: -5381317618040538403}
   m_Layer: 0
   m_Name: exp3
   m_TagString: Untagged
@@ -4858,9 +4859,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16aef903fe53d2e40aeb40dbd969f544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Exp3
+  Name: 
   starts: {fileID: 5224765436859849027}
   Level: 3
+--- !u!58 &-5381317618040538403
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573925880535425436}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.05
 --- !u!1 &6284295074178619777
 GameObject:
   m_ObjectHideFlags: 0
