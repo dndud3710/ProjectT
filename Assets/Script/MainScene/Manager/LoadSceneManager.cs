@@ -45,6 +45,7 @@ public class LoadSceneManager : MonoBehaviour
         loadingpanel.SetActive(true);
         AudioManager.Instance.BGMPlay(AudioManager.BGMList.¿¸≈ı¿Ωæ«);
         palyerinfo.StartGameCoin();
+        GameManager.Instance.setPlayerStat(palyerinfo.getDamage(), palyerinfo.getHealth());
         StartCoroutine(LoadCoroutine());
     }
 

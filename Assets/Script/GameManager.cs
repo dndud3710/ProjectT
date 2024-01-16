@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     Dictionary<string, GameObject> EquipItemsDictionary;
     [HideInInspector]
     public List<EquipItem> EquipWeaponsList { get; private set; }
+    //메인씬의 플레이어 스탯을 받아서 인게임 플레이어에 넘겨주는 함수 : 나중에 구조체전달로 바꿔도 될듯
+    private int[] playerstat;
 
     private void Awake()
     {
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
     
     public void PlayerInfoInit()
     {
+        playerstat = new int[2];
         PlayerPrefs.SetInt("Stage", 1);
         PlayerPrefs.SetInt("Level", 1);
         PlayerPrefs.SetInt("Money", 0);
@@ -118,22 +121,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //초기화 영역
-        if (SceneNum < 255)
-        {
-            switch(SceneNum)
-            {
-                case 0: //메인 씬이 되는 순간
-                    MainSceneInit();
-                    break;
-                case 1:
-                    GameSceneInit();
-                    break;
-
-            }
-            // 다시 실행하지 못하도록
-            SceneNum = 256;
-        }
+        
     }
 
     
@@ -186,5 +174,15 @@ public class GameManager : MonoBehaviour
         return EquipItemsDictionary[s];
     }
     #endregion
-    
+
+    public void setPlayerStat(int damage_, int health_)
+    {
+        playerstat[0] = damage_;
+        playerstat[1] = health_;
+    }
+    public int[] getPlayerStat()
+    {
+        return playerstat;
+    }
+
 }

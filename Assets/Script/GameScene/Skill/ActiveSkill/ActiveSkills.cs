@@ -37,6 +37,8 @@ public class ActiveSkills : MonoBehaviour , IngameSkill
 
     public string EDiscription { get { return Description; } }
 
+    public int ESkillLevel { get { return SkillLevel; } }
+
     protected virtual void Start()
     {
         SkillLevel = 1;

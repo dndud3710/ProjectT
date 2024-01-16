@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     //선택한 스킬들은 자식오브젝트인, haveSkills에 들어간다
     //haveskills에 들어가면서 List에 드렁가는데 패시브는 얻자마자 효과가 발동되고,
     public Transform HaveSkill;
-    private List<IngameSkill> skillList;
+    List<IngameSkill> skillList;
 
     private void Awake()
     {
@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
         //Skills.Add(DataManager.Instance.getActiveSkillObject(EActiveSkillType.SwordSlash));
         //GameObject g = Instantiate(Skills[0]);
         //g.GetComponent<ActiveSkills>().Use();ㄴ
+
+       
 
 
         //플레이어가 어떤 무기를 장착했는지에 따라 초기 스킬을 설정
@@ -61,8 +63,27 @@ public class Player : MonoBehaviour
 
 
     }
+    //레벨업 시에 SkillManage스크립트에서 랜덤 스킬을 3개생성하는데, 여기서 캐릭터가 가지고 있는 스킬레벨이 5이상인경우가 있으면 true
+    public bool getSkillLevel(EActiveSkillType es_)
+    {
+        GameObject g_ = DataManager.Instance.getActiveSkillObject(es_);
+        string skillname_ =  g_.GetComponent<IngameSkill>().ESkillName;
+        foreach (IngameSkill i in skillList)
+        {
+            if (skillname_.Equals(i.ESkillName))
+            {
+                if(i.ESkillLevel>=5)
+                    return true;
+            }
+        }
+        return false;
+    }
     void Init()
     {
+        int[] i_ = GameManager.Instance.getPlayerStat();
+        damage = i_[0];
+        maxHP = i_[1];
+
         curExp = 0;
         maxExp = new int[6] { 100, 200, 300, 400, 500, 600 };
         HpBar.maxValue = maxHP;

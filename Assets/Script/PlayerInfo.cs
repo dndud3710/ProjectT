@@ -197,4 +197,5 @@ public class PlayerInfo : MonoBehaviour
     {
         return Maxhealth;
     }
+   
 }

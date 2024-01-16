@@ -14,8 +14,10 @@ public interface IngameSkill
     public Sprite ESkillImage { get; }
     public string ESkillName { get; }
     public string EDiscription { get; }
+    public int ESkillLevel { get; }
     void Use() { } //패시브도 레벨업하거나 얻는순간 Use로 하게하려고 만듦
     void SkillLevelUp() { }
+
 }
 
 public interface WeaponSkillType

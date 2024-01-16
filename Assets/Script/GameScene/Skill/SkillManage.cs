@@ -58,8 +58,20 @@ public class SkillManage : MonoBehaviour
         for (int i = 0; i < gg_.Length; i++)
         {
             EActiveSkillType ea_ = (EActiveSkillType)UnityEngine.Random.Range(0, enumlen);
-            if (check[(int)ea_]== true) { i--;continue; } //중복 제거
-            
+
+            //중복 제거
+            if (check[(int)ea_]== true) {
+                i--;
+                continue; } 
+
+
+            //skilllevel이 5일경우는 안나와야함
+            if (StageManager.Instance.playerScript.getSkillLevel(ea_))
+            {
+                continue;
+            }
+            //마지막단계 : skillevel이 
+
             check[(int)ea_]= true;
             gg_[i] = DataManager.Instance.getActiveSkillObject(ea_);
         }
