@@ -6,6 +6,7 @@ public class Meet : InGameItem
 {
     public override void Use()
     {
+        base.Use();
         StageManager.Instance.playerScript.TakeHeal((float)(StageManager.Instance.playerScript.maxHP * (40f / 100f)));
         Destroy(gameObject);
     }

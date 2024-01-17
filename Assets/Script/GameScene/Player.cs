@@ -178,10 +178,10 @@ public class Player : MonoBehaviour
 
     private void Dead()
     {
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             currentHP = 0;
-            //스테이지 실패 UI
+            StageManager.Instance.Lose();
         }
     }
 

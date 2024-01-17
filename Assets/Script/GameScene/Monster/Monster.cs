@@ -33,7 +33,7 @@ public class Monster : MonoBehaviour
         animator.SetTrigger("Hit");
         Dead();
     }
-    public void Dead()
+    public virtual void Dead()
     {
         if (curHp <= 0)
         {

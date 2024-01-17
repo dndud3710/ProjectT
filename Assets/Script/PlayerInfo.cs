@@ -24,8 +24,6 @@ public class PlayerInfo : MonoBehaviour
         damage = 0;
         Maxhealth = 0;
 
-        GameManager.Instance.getItem("°Ë");
-        GameManager.Instance.getItem("ÃÑ");
     }
     void changeStat(EquipItem eq_,ref int damage_,ref int maxhealth_,bool inde)
     {

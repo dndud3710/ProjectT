@@ -71,6 +71,11 @@ public class DataManager : MonoBehaviour
         IStages gett= stage[num-1].GetComponent<IStages>();
         return gett.getMonsters();
     }
+    public GameObject BossMonster(int num)
+    {
+        IStages gett = stage[num - 1].GetComponent<IStages>();
+        return gett.bossMonster();
+    }
     public GameObject getMapTile(int num)
     {
         IStages gett = stage[num - 1].GetComponent<IStages>();

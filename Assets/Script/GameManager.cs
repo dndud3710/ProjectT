@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -58,7 +59,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 자료구조 초기화
-       
+
+        GameManager.Instance.getItem("검");
+        GameManager.Instance.getItem("총");
         PlayerInfoInit();
         //프리팹 같은 로딩
         //씬마다 다른 로딩은 함수에서
@@ -111,9 +114,13 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region 씬 초기화
-    void MainSceneInit()
+    public void MainSceneInit()
     {
-
+        foreach(EquipItem e in  EquipWeaponsList)
+        {
+            getItem(e.ItemName);
+        }
+        print(equips.Length);
     }
     void GameSceneInit()
     {
@@ -181,5 +188,5 @@ public class GameManager : MonoBehaviour
     {
         return playerstat;
     }
-
+    
 }

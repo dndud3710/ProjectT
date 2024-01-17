@@ -18,7 +18,7 @@ public class LoadSceneManager : MonoBehaviour
     private Color panelAlpha;
     private Image panelImage;
 
-
+    public EquipUI equipui;
     public GameObject PlayerStateUI;
     public GameObject MainGameObject;
     public GameObject ChapterSelectGameObject;
@@ -38,6 +38,8 @@ public class LoadSceneManager : MonoBehaviour
     {
         panelAlpha = loadingpanel.GetComponent<Image>().color;
         panelImage = loadingpanel.GetComponent<Image>();
+        GameManager.Instance.equipUI = equipui;
+        GameManager.Instance.MainSceneInit();
     }
     public void GameSceneLoad()
     {

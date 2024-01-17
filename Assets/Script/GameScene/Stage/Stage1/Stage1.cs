@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Stage1 : MonoBehaviour,IStages
 {
     public GameObject[] Monsters;
+    public GameObject BossMonster;
     public GameObject MapTile;
     public string StageName;
     public Sprite StageImage;
@@ -26,5 +27,8 @@ public class Stage1 : MonoBehaviour,IStages
         return StageImage;
     }
 
-
+    public GameObject bossMonster()
+    {
+        return BossMonster;
+    }
 }

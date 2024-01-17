@@ -8,7 +8,15 @@ public class InGameItem : MonoBehaviour
     public string Name;
     public bool Magnet;
     private float speed=3;
-    public virtual void Use() { }
+    public AudioClip au;
+    protected virtual void Start()
+    {
+        au = AudioManager.Instance.SFXSound[1];
+    }
+    public virtual void Use() 
+    {
+        AudioManager.Instance.AudioPlaying(au);
+    }
     protected virtual void Update()
     {
         if (Magnet)

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class SmallMonster : Monster
 {
-    
+    enum movepatter
+    {
+        slow,
+        fast
+    }
+    movepatter mp;
     bool attackOnOff;
-    Coroutine c;
+    Coroutine c,d;
     Rigidbody2D rb;
     SpriteRenderer sp;
     new void Start()
@@ -15,29 +20,48 @@ public class SmallMonster : Monster
         c=StartCoroutine(AttackCoroutine());
         rb = GetComponent<Rigidbody2D>();
         sp = gameObject.GetComponentInChildren<SpriteRenderer>();
-        
+        mp = movepatter.slow;
     }
 
 
     private void OnEnable()
     {
         c=StartCoroutine(AttackCoroutine());
-        
+        d = StartCoroutine(movePattern());
     }
     private void OnDisable()
     {
         curHp = maxHp;
         StopCoroutine(c);
+        StopCoroutine(d);
         if (sp != null)
         {
             Color d = sp.color;
             d.a = 255;
             sp.color = d;
         }
+        
     }
     void FixedUpdate()
     {
-        rb.velocity = (Player_tf.position - transform.position).normalized * Speed;
+        if (mp==movepatter.slow)
+        {
+            rb.velocity = (Player_tf.position - transform.position).normalized * (Speed*0.6f);
+        }
+        else if(mp==movepatter.fast)
+        {
+            rb.velocity = (Player_tf.position - transform.position).normalized * Speed;
+        }
+    }
+    IEnumerator movePattern()
+    {
+        while (true)
+        {
+            mp = movepatter.fast;
+            yield return new WaitForSeconds(2f);
+            mp= movepatter.slow;
+            yield return new WaitForSeconds(2f);
+        }
     }
     protected IEnumerator AttackCoroutine()
     {

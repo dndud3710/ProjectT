@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -13,27 +14,40 @@ public class AudioManager : MonoBehaviour
     public AudioSource[] BGMSource;
 
     [Header("SFX")]
-    public AudioClip[] SFXSound;
+    public AudioClip[] SFXSound; //1 아이템먹는소리
     public float SFXVolume;
     public int chanels;
     public AudioSource[] SFXSource;
 
+    public AudioSource MenuBeeps;
 
+    public GameObject sori;
+    List<GameObject> sfxs;
     GameObject BGMobj;
     GameObject SFXobj;
     public enum BGMList
     {
-        메인음악=0,
+        메인음악 = 0,
         전투음악
     }
     public enum SFXList
     {
-        메뉴선택=0
+        메뉴선택 = 0,
+        아이템획득,
+        쉴드시작,
+        쉴드어택,
+        총발사,
+        총맞음,
+        검기발사,
+        검기맞음,
+        망치던짐,
+        망치맞음
+
     }
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -51,11 +65,23 @@ public class AudioManager : MonoBehaviour
     }
     void Init()
     {
+
         prevBgmindex = -1;
         BGMobj = new GameObject("BGM");
         SFXobj = new GameObject("SFX");
+
+        sfxs = new List<GameObject>();
+        SFXSource = new AudioSource[100];
+
+        for (int i = 0; i < SFXSource.Length; i++)
+        {
+            GameObject g_ = new GameObject("SFXs");
+            g_.transform.parent = transform;
+            sfxs.Add(g_);
+        }
+
+
         BGMSource = new AudioSource[BGMSound.Length];
-        SFXSource = new AudioSource[SFXSound.Length];
 
         BGMobj.transform.parent = transform;
         SFXobj.transform.parent = transform;
@@ -68,18 +94,23 @@ public class AudioManager : MonoBehaviour
             BGMSource[i].playOnAwake = false;
             BGMSource[i].loop = true;
         }
-
-        for (int i = 0; i < SFXSound.Length; i++)
+        MenuBeeps = SFXobj.AddComponent<AudioSource>();
+        MenuBeeps.clip = SFXSound[0];
+        MenuBeeps.volume = 0.5f;
+        MenuBeeps.playOnAwake = false;
+        MenuBeeps.loop = false;
+        for(int i=0;i<SFXSource.Length;i++)
         {
-            SFXSource[i] = SFXobj.AddComponent<AudioSource>();
-            SFXSource[i].clip = SFXSound[i];
-            SFXSource[i].volume = 0.5f;
+            SFXSource[i]= sfxs[i].AddComponent<AudioSource>();
+            SFXSource[i].clip = null;
+            SFXSource[i].volume = 0.2f;
             SFXSource[i].playOnAwake = false;
             SFXSource[i].loop = false;
         }
-
-
     }
+
+
+
     public void BGMPlay(BGMList bg)
     {
         if (prevBgmindex != -1)
@@ -95,7 +126,24 @@ public class AudioManager : MonoBehaviour
     }
     public void MenuBeepPlay()
     {
-        SFXSource[(int)SFXList.메뉴선택].Play();
+        MenuBeeps.Play();
+    }
+
+    public void AudioPlaying(AudioClip c_)
+    {
+        foreach (AudioSource au_ in SFXSource)
+        {
+            print(au_.clip);
+            print(au_.isPlaying);
+           if(au_.clip==null||au_.isPlaying == false)
+            {
+                print("넣음");
+                au_.clip = c_;
+                au_.Play();
+                break;
+            }
+           
+        }
     }
 
 }

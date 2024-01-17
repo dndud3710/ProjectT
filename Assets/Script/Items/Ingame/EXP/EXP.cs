@@ -15,8 +15,9 @@ public class EXP : InGameItem
     Vector2 Mypos;
     float xx=0, yy=0;
     float sp=1f;
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         starts.Play();
         Mypos = transform.position;
     }
@@ -48,6 +49,7 @@ public class EXP : InGameItem
     }
     public override void Use()
     {
+
         if (!Magnet)
         {
             vec = transform.position - StageManager.Instance.Player.transform.position;
@@ -55,7 +57,9 @@ public class EXP : InGameItem
             vec *= 1.4f;
             vec += Mypos;
             stars = true;
+
         }
+            
     }
     private void OnDestroy()
     {
@@ -69,6 +73,7 @@ public class EXP : InGameItem
             if(stars_ || Magnet)
             {
                 print("»ç¶óÁü!");
+                AudioManager.Instance.AudioPlaying(au);
                 Destroy(gameObject);
             }
         }

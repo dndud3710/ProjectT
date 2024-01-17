@@ -32,7 +32,9 @@ public class StageManager : MonoBehaviour
     public GameObject deadPArticle;
     public GameState StateUI;//시간,exp바,획득골드,킬상태를 보여주는 UI관리오브젝트
     public SkillManage skillmanager;
-
+    public Failed failedUI;
+    public WinU winUI;
+    public GameObject BossRoom;
 
     Stopwatch st;
     const short  zero_ = 0;
@@ -108,6 +110,11 @@ public class StageManager : MonoBehaviour
         
     }
    
+    public void MakeBossRoom()
+    {
+        GameObject g_ = Instantiate(BossRoom);
+        g_.transform.position = Player.transform.position;
+    }
     
 
 
@@ -116,15 +123,44 @@ public class StageManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            for(int i=0;i<5;i++)
+            for (int i = 0; i < 3; i++)
                 ObjectPool.Instance.AliveMonster(0);
-            
+            if (st.Elapsed.Seconds > 5)
+                for (int i = 0; i < 2; i++)
+                    ObjectPool.Instance.AliveMonster(1);
+            if (st.Elapsed.Seconds >=30)
+            {
+                ObjectPool.Instance.BossStart();
+                for (int i = 0; i < 3; i++)
+                {
+                    StateUI.SetCount(i);
+                    yield return new WaitForSeconds(1f);
+                }
+                StateUI.bosscount.gameObject.SetActive(false);
+                MakeBossRoom();
+                ObjectPool.Instance.makeBoss();
+                break;
+            }
         }
     }
 
     public void ReturnToMain()
     {
         SceneManager.LoadScene("Main Scene");
+    }
+
+
+    public void Win()
+    {
+        winUI.Win();
+        winUI.setText(Killnum, Coins);
+        st.Stop();
+    }
+    public void Lose()
+    {
+        failedUI.Fail();
+        failedUI.setText(Killnum,st);
+        st.Stop();
     }
 
 
@@ -192,5 +228,18 @@ public class StageManager : MonoBehaviour
         }
         return magnetList;
     }
+
     #endregion
+
+    public void Ending(bool d)
+    {
+        //승리하면 골드랑 경험치 보상획득
+        if (d)
+        {
+            SceneManager.LoadScene("Main Scene");
+        }
+        else //실패하면 무 없으ㅜㅁ
+            SceneManager.LoadScene("Main Scene");
+        AudioManager.Instance.MenuBeepPlay();
+    }
 }

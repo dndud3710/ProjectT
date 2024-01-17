@@ -8829,9 +8829,20 @@ MonoBehaviour:
   BGMSource: []
   SFXSound:
   - {fileID: 8300000, guid: 6be3f527d76beb4409f26bd5b9668c83, type: 3}
+  - {fileID: 8300000, guid: 94fa2e35661485049a7d087bb7a89d0f, type: 3}
+  - {fileID: 8300000, guid: f555d65000490964fa99ebe3c8b3aa71, type: 3}
+  - {fileID: 8300000, guid: 7d8ccd6d3b797ab4ca3a6b2bb18de198, type: 3}
+  - {fileID: 8300000, guid: cc0701aa76e94e84e86d6528736aab7a, type: 3}
+  - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
+  - {fileID: 8300000, guid: ef1f0170ab5682c48b9cab9674e68ff1, type: 3}
+  - {fileID: 8300000, guid: 58ec78af03a09334f9f3a8cbbfdfb216, type: 3}
+  - {fileID: 8300000, guid: 6e921f6e0edd30b42ad2f90ff1bae792, type: 3}
+  - {fileID: 8300000, guid: a3f3e80bceabe8042b9d5ccc5a7552ac, type: 3}
   SFXVolume: 0
   chanels: 0
   SFXSource: []
+  MenuBeeps: {fileID: 0}
+  sori: {fileID: 0}
 --- !u!4 &1409954475
 Transform:
   m_ObjectHideFlags: 0
@@ -10131,6 +10142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingpanel: {fileID: 1354663287}
+  equipui: {fileID: 1260486276}
   PlayerStateUI: {fileID: 833464821}
   MainGameObject: {fileID: 890314235}
   ChapterSelectGameObject: {fileID: 1572111001}

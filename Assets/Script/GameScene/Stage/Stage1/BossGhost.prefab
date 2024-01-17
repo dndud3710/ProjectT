@@ -92,6 +92,7 @@ MonoBehaviour:
   Damage: 20
   Speed: 1
   Wave: 2
+  Ghost: {fileID: 1855890463757321753, guid: 8345c884a2ee4c8409cb88bce7664ab3, type: 3}
 --- !u!1 &1855890464071124188
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool Instance;
     //스테이지 프리팹을 가져와서 해당 몬스터들을 소환
     public GameObject[] StageMonsters;
+    public GameObject BossMonster;
     // public Gameobject
 
     //몬스터 리스트들
@@ -38,7 +40,7 @@ public class ObjectPool : MonoBehaviour
     private void Start()
     {
         StageMonsters = DataManager.Instance.getStageMonsters(PlayerPrefs.GetInt("Stage"));
-
+        BossMonster = DataManager.Instance.BossMonster(PlayerPrefs.GetInt("Stage"));
         int j = 0;
         foreach(GameObject p in StageMonsters)
         {
@@ -54,9 +56,10 @@ public class ObjectPool : MonoBehaviour
                     }
             j++;
         }
+
         player = StageManager.Instance.Player.transform;
     }
-
+    
     public void DeadMonsterInit(int wave, GameObject monsterobject)
     {
         SmallMonster monscript = monsterobject.GetComponent<SmallMonster>();
@@ -87,6 +90,26 @@ public class ObjectPool : MonoBehaviour
             DeadMonsters[wave].Add(monsterobj);
             monsterobj.SetActive(false);
         }
+    }
+    public void BossStart()
+    {
+        int len;
+        for(int i=0;i<2;i++)
+        {
+            len = AliveMonsters[i].Count;
+            for (int j = 0; j < len; j++) {
+                DeadMonsters[i].Add(AliveMonsters[i][0]);
+                AliveMonsters[i][0].SetActive(false);
+                AliveMonsters[i].Remove(AliveMonsters[i][0]);
+            }
+        }
+        
+    }
+    public void makeBoss()
+    {
+        GameObject g_ = Instantiate(BossMonster);
+        g_.transform.position = new Vector3(StageManager.Instance.Player.transform.position.x+1, StageManager.Instance.Player.transform.position.y +1, 0);
+        StageManager.Instance.StateUI.BossStart(g_.GetComponent<Monster>().maxHp);
     }
     
     public Vector2 MonsterRegeneratorRange()

@@ -10,6 +10,7 @@ public interface IStages
 {
     public GameObject[] getMonsters();
     public GameObject getMapTile();
+    public GameObject bossMonster();
     public string getStageName();
     public Sprite getStageImage();
 

@@ -4,13 +4,13 @@ using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
-public class Failed : MonoBehaviour
+public class WinU : MonoBehaviour
 {
-    public GameObject[] d;
 
+    public GameObject[] d;
     public TextMeshProUGUI killtext;
-    public TextMeshProUGUI timetext;
-    public void Fail()
+    public TextMeshProUGUI goldtext;
+    public void Win()
     {
         Time.timeScale = 0;
         foreach (GameObject go in d)
@@ -19,9 +19,9 @@ public class Failed : MonoBehaviour
         }
     }
 
-    public void setText(int kill,Stopwatch time)
+    public void setText(int kill, int gold)
     {
         killtext.text = kill.ToString();
-        timetext.text = $"√÷∞Ì  {time.Elapsed.Minutes} : {time.Elapsed.Seconds}"; 
+        goldtext.text = gold.ToString();
     }
 }

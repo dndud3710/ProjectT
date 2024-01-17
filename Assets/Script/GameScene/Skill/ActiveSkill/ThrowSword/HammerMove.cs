@@ -11,6 +11,8 @@ public class HammerMove : ThrowSkill
     {
         base.Start();
         cr = GetComponent<CircleCollider2D>();
+        AudioManager.Instance.AudioPlaying(AudioManager.Instance.SFXSound[(int)AudioManager.SFXList.¸ÁÄ¡´øÁü]);
+        setAU_(AudioManager.SFXList.¸ÁÄ¡¸ÂÀ½);
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

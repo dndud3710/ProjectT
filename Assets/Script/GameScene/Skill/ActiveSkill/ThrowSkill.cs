@@ -14,10 +14,15 @@ public class ThrowSkill : MonoBehaviour
     [Tooltip("오브젝트가 날라가는 속도")]
     protected float Speed;
 
+
     //UI전용 트랜스폼
     RectTransform rt;
     protected Vector2 forwardgo;
-
+    AudioClip au_;
+    protected void setAU_(AudioManager.SFXList sfxlist)
+    {
+        au_ = AudioManager.Instance.SFXSound[(int)sfxlist];
+    }
   
     protected virtual void Start()
     {
@@ -54,6 +59,7 @@ public class ThrowSkill : MonoBehaviour
         if (pt == PointType.UI)
             transform.Rotate(0, 0, 3f);
     }
+    
     public void DurationZero()
     {
         Du = -1;
@@ -85,11 +91,14 @@ public class ThrowSkill : MonoBehaviour
 
                     monster.TakeDamage(damage);
                 }
+            AudioManager.Instance.AudioPlaying(au_);
         }
         else if(collision.CompareTag("ItemChest"))
         {
             collision.TryGetComponent<ItemChest>(out ItemChest chest);
+            AudioManager.Instance.AudioPlaying(au_);
             chest.detroy();
         }
+
     }
 }

@@ -13,6 +13,13 @@ public class GameState : MonoBehaviour
     public TextMeshProUGUI getGoldText;
     public TextMeshProUGUI getKillText;
     public TextMeshProUGUI getTimeText;
+
+    public GameObject[] BossOffTimeUI;
+    public Slider bossHP;
+
+    public Sprite[] numbers;
+    public Image bosscount;
+
     private void Start()
     {
         
@@ -43,6 +50,25 @@ public class GameState : MonoBehaviour
         if(t)
             EXPBar.maxValue = StageManager.Instance.playerScript.maxExp[StageManager.Instance.playerScript.Level - 1];
         EXPBar.value = StageManager.Instance.playerScript.curExp;
+    }
+
+    public void BossStart(int maxhp_)
+    {
+        foreach (GameObject a in BossOffTimeUI)
+            a.SetActive(false);
+        bossHP.gameObject.SetActive(true);
+        bossHP.maxValue = maxhp_;
+        bossHP.value = maxhp_;
+        
+    }
+    public void setBossHP(int curhp_)
+    {
+        bossHP.value = curhp_;
+    }
+    public void SetCount(int n)
+    {
+        bosscount.gameObject.SetActive(true);
+        bosscount.sprite = numbers[n];
     }
 
 }
