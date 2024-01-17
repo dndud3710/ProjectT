@@ -6,10 +6,10 @@ using static UnityEditor.Progress;
 public class InGameItem : MonoBehaviour
 {
     public string Name;
-    private bool Magnet;
+    public bool Magnet;
     private float speed=3;
     public virtual void Use() { }
-    private void Update()
+    protected virtual void Update()
     {
         if (Magnet)
         {

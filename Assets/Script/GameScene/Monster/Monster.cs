@@ -17,7 +17,7 @@ public class Monster : MonoBehaviour
     public float Speed;
     public int Wave;
     Animator animator;
-    protected void Start()
+    protected virtual void Start()
     {
         Player_tf = StageManager.Instance.Player.transform;
         player_sc = StageManager.Instance.Player.GetComponent<Player>();
@@ -26,7 +26,6 @@ public class Monster : MonoBehaviour
     }
     private void Update()
     {
-        Dead();
     }
     public virtual void TakeDamage(int damage_)
     {
