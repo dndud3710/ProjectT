@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             varInit();
             DictionaryInit();
+
+            PlayerInfoInit();
         }
         else
             Destroy(gameObject);
@@ -61,10 +63,11 @@ public class GameManager : MonoBehaviour
     {
         // 자료구조 초기화
 
+        
+        Starting();
+       
         GameManager.Instance.getItem("검");
         GameManager.Instance.getItem("총");
-        PlayerInfoInit();
-
         //프리팹 같은 로딩
         //씬마다 다른 로딩은 함수에서
         int num;
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
             StageName.Add(num, DataManager.Instance.getStageName(num));
             StageSprite.Add(StageName[num], DataManager.Instance.getStageImage(num));
         }
+        initEvent?.Invoke();
     }
     
     public void PlayerInfoInit()
@@ -192,4 +196,9 @@ public class GameManager : MonoBehaviour
         return playerstat;
     }
     
+    void Starting()
+    {
+        LoadSceneManager.Instance.PlayerStateUI.GetComponent<PlayerInfoUI>().Subscribe();
+        LoadSceneManager.Instance.mcsi.Subscribe();
+    }
 }

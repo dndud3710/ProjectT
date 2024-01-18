@@ -22,6 +22,7 @@ public class LoadSceneManager : MonoBehaviour
     public GameObject PlayerStateUI;
     public GameObject MainGameObject;
     public GameObject ChapterSelectGameObject;
+    public MainChapterSelectInit mcsi;
 
     public Transform CameraTF;
     public Transform MainTF;
