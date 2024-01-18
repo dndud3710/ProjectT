@@ -13,7 +13,6 @@ public class MainChapterSelectInit : MonoBehaviour
     public PlayerInfo playerinfo;
     private void Start()
     {
-        GameManager.Instance.initEvent += Init;
     }
     public void Init()
     {
@@ -21,8 +20,8 @@ public class MainChapterSelectInit : MonoBehaviour
         StageName.text = $"{playerinfo.getCurStage()}. {GameManager.Instance.getStageName(playerinfo.getCurStage())}";
         StageImage.sprite = GameManager.Instance.getStageImage(playerinfo.getCurStage());
     }
-    private void OnDestroy()
+    public void Subscribe()
     {
-        GameManager.Instance.initEvent -= Init;
+        GameManager.Instance.initEvent += Init;
     }
 }

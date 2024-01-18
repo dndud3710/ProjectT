@@ -12,7 +12,7 @@ public class PlayerInfo : MonoBehaviour
     /// 이 정보들은 인게임으로 들어갈 때 stage때 필요한 변수값들을 gamemanager를 통해 전송
     /// </summary>
 
-    private int[] maxEXP = { 100, 200, 300, 400, 500 };
+    private int[] maxEXP = { 100, 200, 300, 400, 500,600,700,800,900,1000 };
 
     private int damage;
     private int Maxhealth;

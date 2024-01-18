@@ -24,7 +24,6 @@ public class PlayerInfoUI : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.initEvent += Init;
     }
 
     public void Init()
@@ -37,8 +36,8 @@ public class PlayerInfoUI : MonoBehaviour
         MoneyText.text = $"{playerinfo.getMoney()}";
     }
 
-    private void OnDisable()
+    public void Subscribe()
     {
-        GameManager.Instance.initEvent -= Init;
+        GameManager.Instance.initEvent += Init;
     }
 }

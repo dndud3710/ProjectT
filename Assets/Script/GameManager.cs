@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.getItem("검");
         GameManager.Instance.getItem("총");
         PlayerInfoInit();
+
         //프리팹 같은 로딩
         //씬마다 다른 로딩은 함수에서
         int num;
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("PlayerCurCoin", 20);
         PlayerPrefs.SetInt("PlayerMaxCoin", 20);
         PlayerPrefs.Save();
+        
     }
     #region 인벤토리
 
