@@ -52,7 +52,8 @@ public class StageManager : MonoBehaviour
     //여기서 ingameItem클래스로 list를 둔 이유는 gameobject로 하면 자석아이템을 먹었을때 많은 아이템들을 Use하고 destroy할때
     //getcomponent IngameItem을 순간적으로 많이해야되기 때문이다, ingameitem클래스를가지고 있는 gameobject를 찾아야할때도 있지만
     //자석만큼 많이 getcomponent를 할때가 오지않아서 이렇게 하였다
-    
+    public int firstWaveNum = 3;
+    public int SecondWaveNum = 2;
 
     //파티클 나중에 바꿀거.
     public void deadPrticlePlay(Transform TF)
@@ -116,20 +117,28 @@ public class StageManager : MonoBehaviour
         g_.transform.position = Player.transform.position;
     }
     
+    public void StopTime()
+    {
+        st.Stop();
+    }
 
-
+    public void PlayTime()
+    {
+        st.Start();
+    }
     IEnumerator MonsterRegen()
     {
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < firstWaveNum; i++)
                 ObjectPool.Instance.AliveMonster(0);
-            if (st.Elapsed.Seconds > 5)
-                for (int i = 0; i < 2; i++)
+            if (st.Elapsed.Seconds > 20)
+                for (int i = 0; i < SecondWaveNum; i++)
                     ObjectPool.Instance.AliveMonster(1);
-            if (st.Elapsed.Seconds >=30)
+            if (st.Elapsed.Minutes >=1)
             {
+                print("보스!");
                 ObjectPool.Instance.BossStart();
                 for (int i = 0; i < 3; i++)
                 {
@@ -154,6 +163,7 @@ public class StageManager : MonoBehaviour
     {
         winUI.Win();
         winUI.setText(Killnum, Coins);
+        GameManager.Instance.getReward(Coins, 100);
         st.Stop();
     }
     public void Lose()

@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public List<EquipItem> EquipWeaponsList { get; private set; }
     //메인씬의 플레이어 스탯을 받아서 인게임 플레이어에 넘겨주는 함수 : 나중에 구조체전달로 바꿔도 될듯
-    private int[] playerstat;
+    private int[] playerstat;// 인게임으로 옮길 플레이어 스탯
+    private int[] prevplayerstat; // 인게임이 끝나면 다시 메인화면으로 전달될 플레이어 스탯
 
     private void Awake()
     {
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
     
     public void PlayerInfoInit()
     {
+        prevplayerstat = new int[2] { 0, 0 };
         playerstat = new int[2];
         PlayerPrefs.SetInt("Stage", 1);
         PlayerPrefs.SetInt("Level", 1);
@@ -190,10 +192,26 @@ public class GameManager : MonoBehaviour
     {
         playerstat[0] = damage_;
         playerstat[1] = health_;
+        prevplayerstat[0] = damage_;
+        prevplayerstat[1] = health_;
     }
     public int[] getPlayerStat()
     {
         return playerstat;
+    }
+   public int[] getPrevPlayerStat()
+    {
+        return prevplayerstat;
+    }
+    public void getReward(int gold, int exp)
+    {
+        int gold_ = PlayerPrefs.GetInt("Money");
+        int exp_ = PlayerPrefs.GetInt("PlayerCurEXP");
+        gold_ += gold;
+        exp_ += exp;
+        PlayerPrefs.SetInt("Money", gold_);
+        PlayerPrefs.SetInt("PlayerCurEXP", exp_);
+        PlayerPrefs.Save();
     }
     
     void Starting()

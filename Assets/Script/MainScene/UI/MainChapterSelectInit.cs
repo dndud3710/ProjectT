@@ -14,7 +14,7 @@ public class MainChapterSelectInit : MonoBehaviour
     private void Start()
     {
     }
-    public void Init()
+    private void Init()
     {
 
         StageName.text = $"{playerinfo.getCurStage()}. {GameManager.Instance.getStageName(playerinfo.getCurStage())}";

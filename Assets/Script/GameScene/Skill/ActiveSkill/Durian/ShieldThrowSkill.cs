@@ -53,8 +53,6 @@ public class ShieldThrowSkill : ActiveSkills
                 b.setThrowSkills(StageManager.Instance.playerScript.getDamage() * 2,
                 Duration, ClearPrefabsTime, Speed, pointtype
                 );
-                
-                
             }
             yield return null;
         }

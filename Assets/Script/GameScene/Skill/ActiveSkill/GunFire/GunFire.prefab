@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointtype: 1
   count: 1
-  coolDown: 3
+  coolDown: 1
   Duration: 2
   ClearPrefabsTime: 5
   Speed: 7

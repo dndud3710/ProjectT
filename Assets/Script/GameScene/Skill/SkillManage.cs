@@ -40,6 +40,7 @@ public class SkillManage : MonoBehaviour
     public void SelectSkill(int num)
     {
         //플레이어는 getSkill로 이것을 받고
+        
         if (num < 0 && num > 2) return;
         StageManager.Instance.playerScript.GetSkill(ThreeSkills[num]);
         
@@ -49,6 +50,8 @@ public class SkillManage : MonoBehaviour
     {
         int ELength = Enum.GetValues(typeof(EActiveSkillType)).Length;
         //레벨업 UI활성화 시키고
+        Time.timeScale = 0f;
+        StageManager.Instance.StopTime();
         LevelUpUI.SetActive(true);
         panel.SetActive(true);
         bool[] check = new bool[ELength];
@@ -79,6 +82,8 @@ public class SkillManage : MonoBehaviour
     }
     private void OffLevelUpSelectSkills()
     {
+        Time.timeScale = 1.0f;
+        StageManager.Instance.PlayTime();
         LevelUpUI.SetActive(false);
         panel.SetActive(false);
     }

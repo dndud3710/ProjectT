@@ -26,7 +26,7 @@ public class PlayerInfoUI : MonoBehaviour
     {
     }
 
-    public void Init()
+    private void Init()
     {
         PlayerName.text = playerinfo.getName();
         LevelText.text = playerinfo.getLevel().ToString();

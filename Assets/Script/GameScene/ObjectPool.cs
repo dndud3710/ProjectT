@@ -11,6 +11,8 @@ public class ObjectPool : MonoBehaviour
     /// 게임을 만들면서 느낀점
     /// objectpool의 설계를 잘해야할 것 같다
     /// 예를들어 몬스터는 잘 만들었지만, exp아이템이라던지 많이 나올거같은 것들까지 신경쓰면서 설계했었어야햇다
+    /// 다음에는 오브젝트 풀은 몬스터 리스트 관리만. 실제로 생성 및 죽는것은 스테이지에서 할 예정
+    /// 너무 개판이다 진로를 바꿀까
     /// </summary>
     public static ObjectPool Instance;
     //스테이지 프리팹을 가져와서 해당 몬스터들을 소환
@@ -21,7 +23,7 @@ public class ObjectPool : MonoBehaviour
     //몬스터 리스트들
     List<List<GameObject>> DeadMonsters;
     List<List<GameObject>> AliveMonsters;
-    // 0~2 일반,중간보스 , 2~5 상위섞임, 5분 보스, 5~8 개체량 두배, 8 중간보스, 8~10 최상위종, 10분 최종보스
+    // 0~1 일반웨이브 2 보스
 
     Transform player;
 

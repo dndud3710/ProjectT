@@ -21,9 +21,9 @@ public class PlayerInfo : MonoBehaviour
 
     private void Start()
     {
-        damage = 0;
-        Maxhealth = 0;
-
+        int[] d = GameManager.Instance.getPrevPlayerStat();
+         damage = d[0];
+         Maxhealth = d[1];
     }
     void changeStat(EquipItem eq_,ref int damage_,ref int maxhealth_,bool inde)
     {

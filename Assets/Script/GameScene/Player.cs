@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         maxHP = i_[1];
 
         curExp = 0;
-        maxExp = new int[6] { 100, 200, 300, 400, 500, 600 };
+        maxExp = new int[11] { 30,40,50,60,70,80,90,100,110,120,130 };
         HpBar.maxValue = maxHP;
         HpBar.value = maxHP;
         currentHP = maxHP;
