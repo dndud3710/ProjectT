@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         maxHP = i_[1];
 
         curExp = 0;
-        maxExp = new int[11] { 30,40,50,60,70,80,90,100,110,120,130 };
+        maxExp = new int[11] { 30,40,55,70,100,110,120,130,200,250,500 };
         HpBar.maxValue = maxHP;
         HpBar.value = maxHP;
         currentHP = maxHP;
@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
     {
         //TODO: 나중에 항상 실행되지 않게 막아야 함
         rb.velocity = Dir * speed;
+        print("dpd");
     }
     private void Update()
     {
@@ -203,9 +204,14 @@ public class Player : MonoBehaviour
                 Attackmonster = monster.gameObject;
             }
         }
-        Vector2 vec = Attackmonster.transform.position - transform.position;
-        float Shotangle = (Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg) - 90;
-        return Quaternion.Euler(new Vector3(0, 0, Shotangle));
+        if (Attackmonster != null)
+        {
+            Vector2 vec = Attackmonster.transform.position - transform.position;
+            float Shotangle = (Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg) - 90;
+            return Quaternion.Euler(new Vector3(0, 0, Shotangle));
+        }
+        Quaternion q = Quaternion.identity;
+        return q;
     }
 
     #endregion

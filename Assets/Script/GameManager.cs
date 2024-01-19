@@ -81,6 +81,30 @@ public class GameManager : MonoBehaviour
         initEvent?.Invoke();
     }
     
+    public void Bbolgi()
+    {
+        int n = UnityEngine.Random.Range(0, 5);
+        switch (n)
+        {
+            case 0:
+                GameManager.Instance.getItem("°Ë");
+                break;
+                case 1:
+                GameManager.Instance.getItem("ÃÑ");
+                break;
+                case 2:
+                GameManager.Instance.getItem("°¡Á×Åõ±¸");
+                break;
+                case 3:
+                GameManager.Instance.getItem("°¡Á×¹ÙÁö");
+                break;
+            case 4:
+                GameManager.Instance.getItem("¸ñ°ÉÀÌ");
+                break;
+        }
+        
+
+    }
     public void PlayerInfoInit()
     {
         prevplayerstat = new int[2] { 0, 0 };
@@ -190,8 +214,8 @@ public class GameManager : MonoBehaviour
 
     public void setPlayerStat(int damage_, int health_)
     {
-        playerstat[0] = damage_;
-        playerstat[1] = health_;
+        playerstat[0] = damage_ + 20;
+        playerstat[1] = health_ + 200;
         prevplayerstat[0] = damage_;
         prevplayerstat[1] = health_;
     }

@@ -54,6 +54,9 @@ public class MisiileSkill : ActiveSkills
             {
                 c--;
                 yield return new WaitForSeconds(1f);
+                currentRotation = SearchMonster();
+                if (currentRotation == Quaternion.identity)
+                    break;
                 GameObject g = Instantiate(Bullet, ParentTransform);
                 MissileMove b = g.GetComponent<MissileMove>();
 
@@ -61,7 +64,7 @@ public class MisiileSkill : ActiveSkills
                     Duration, ClearPrefabsTime, Speed, pointtype
                     );
                 g.transform.position = getPlayerTF().position;
-                currentRotation = SearchMonster();
+                
                 g.transform.rotation = currentRotation;
             }
         }

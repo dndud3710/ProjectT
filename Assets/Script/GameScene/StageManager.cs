@@ -247,9 +247,11 @@ public class StageManager : MonoBehaviour
         if (d)
         {
             SceneManager.LoadScene("Main Scene");
+           
         }
         else //실패하면 무 없으ㅜㅁ
             SceneManager.LoadScene("Main Scene");
         AudioManager.Instance.MenuBeepPlay();
+        Time.timeScale = 1f;
     }
 }

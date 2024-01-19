@@ -116,6 +116,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6590865362002944303, guid: 8345c884a2ee4c8409cb88bce7664ab3, type: 3}
+      propertyPath: rootItem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590865362002944303, guid: 8345c884a2ee4c8409cb88bce7664ab3, type: 3}
       propertyPath: MonsterID
       value: 2
       objectReference: {fileID: 0}
