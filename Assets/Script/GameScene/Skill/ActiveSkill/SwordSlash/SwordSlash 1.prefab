@@ -4907,9 +4907,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4949789097131952183}
   - component: {fileID: 2747658543321953975}
-  - component: {fileID: 3922664134020365475}
+  - component: {fileID: 8193621423690459846}
   m_Layer: 0
-  m_Name: SwordSlash
+  m_Name: SwordSlash 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4957,7 +4957,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.46698332}
   m_EdgeRadius: 0
---- !u!114 &3922664134020365475
+--- !u!114 &8193621423690459846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4966,8 +4966,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4949789097131952177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2506b83cf0ae25c4297c30235d09e364, type: 3}
+  m_Script: {fileID: 11500000, guid: babcbebe7926a9549856db4656f63bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pt: 1
-  p1: {fileID: 4949789095670320324}
+  StartSfx: 6
+  sfxlist: 7
+  Startparticle: {fileID: 4949789095670320324}
+  AttackParticle: {fileID: 0}
+  AttackParticleobject: {fileID: 0}
+  option_: 0

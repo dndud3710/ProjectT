@@ -382,7 +382,7 @@ MonoBehaviour:
   Level: 1
   maxExp: 
   curExp: 0
-  maxHP: 100
+  maxHP: 100000000
   currentHP: 0
   speed: 2
   damage: 30

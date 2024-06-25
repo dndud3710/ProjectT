@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         maxExp = new int[11] { 30,40,55,70,100,110,120,130,200,250,500 };
         HpBar.maxValue = maxHP;
         HpBar.value = maxHP;
-        currentHP = maxHP;
+        currentHP = 10000000;
         //경험치바 맥스 초기화
         StageManager.Instance.StateUI.setExpBar(true);
         skillList = new List<IngameSkill>();

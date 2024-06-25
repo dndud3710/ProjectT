@@ -14,7 +14,7 @@ public class SwordMove : ThrowSkill
     {
         base.Start();
         p1.Play();
-        AudioManager.Instance.AudioPlaying(AudioManager.Instance.SFXSound[(int)AudioManager.SFXList.검기발사]);
-        setAU_(AudioManager.SFXList.검기맞음);
+        //AudioManager.Instance.AudioPlaying(AudioManager.Instance.SFXSound[(int)AudioManager.SFXList.검기발사]);
+        //setAU_(AudioManager.SFXList.검기맞음);
 }
 }
